@@ -1,6 +1,6 @@
-import img181ShotsSo1 from "figma:asset/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png";
-import imgImageMask from "figma:asset/ec1c3dd28221b0749c02f1fcd091fc648bb13079.png";
-import imgImageMask1 from "figma:asset/7fc79f8888b8145589fa9b8475a09992e549c744.png";
+import img181ShotsSo1 from "@asset/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png";
+import imgImageMask from "@asset/ec1c3dd28221b0749c02f1fcd091fc648bb13079.png";
+import imgImageMask1 from "@asset/7fc79f8888b8145589fa9b8475a09992e549c744.png";
 
 function Background() {
   return (

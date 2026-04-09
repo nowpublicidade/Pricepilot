@@ -4,11 +4,11 @@ import { Menu, X, Check, ChevronDown, ChevronRight, FileText, Building2, DollarS
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ComparisonSection } from './components/ComparisonSection';
 import { FeaturesOrbitSection } from './components/FeaturesOrbitSection';
-import stepImg01 from 'figma:asset/7f668e210343a08aa0103ba352df8bce67d2202c.png';
-import stepImg02 from 'figma:asset/8f9c9d62d76df3a62d68d523cc56c18eff620824.png';
-import stepImg03 from 'figma:asset/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png';
-import logoColorful from 'figma:asset/3708841680927d1f84aca8553afa7881232456f9.png';
-import logoWhite from 'figma:asset/f94892723fbbb0a4f2f32308df8ee1f6af782af3.png';
+import stepImg01 from '@asset/7f668e210343a08aa0103ba352df8bce67d2202c.png';
+import stepImg02 from '@asset/8f9c9d62d76df3a62d68d523cc56c18eff620824.png';
+import stepImg03 from '@asset/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png';
+import logoColorful from '@asset/3708841680927d1f84aca8553afa7881232456f9.png';
+import logoWhite from '@asset/f94892723fbbb0a4f2f32308df8ee1f6af782af3.png';
 
 const STEP_IMAGES = [stepImg01, stepImg02, stepImg03];
 
@@ -100,8 +100,8 @@ const GLOW_STYLES = `
   }
 `;
 
-import heroMockupImage from 'figma:asset/b45db7ab8c674ad92483b802f10a9128a075e418.png';
-import baseTributariaImage from 'figma:asset/2a1242c933acca66d9023ad40b5fa722a3766521.png';
+import heroMockupImage from '@asset/b45db7ab8c674ad92483b802f10a9128a075e418.png';
+import baseTributariaImage from '@asset/2a1242c933acca66d9023ad40b5fa722a3766521.png';
 
 /* ── Viewport config: once:false so elements re-animate on scroll back ── */
 const VP = { once: false, margin: '-60px' } as const;
