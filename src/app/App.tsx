@@ -4,11 +4,11 @@ import { Menu, X, Check, ChevronDown, ChevronRight, FileText, Building2, DollarS
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ComparisonSection } from './components/ComparisonSection';
 import { FeaturesOrbitSection } from './components/FeaturesOrbitSection';
-import stepImg01 from '@/assets/7f668e210343a08aa0103ba352df8bce67d2202c.png';
-import stepImg02 from '@/assets/8f9c9d62d76df3a62d68d523cc56c18eff620824.png';
-import stepImg03 from '@/assets/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png';
-import logoColorful from '@/assets/3708841680927d1f84aca8553afa7881232456f9.png';
-import logoWhite from '@/assets/f94892723fbbb0a4f2f32308df8ee1f6af782af3.png';
+import stepImg01 from 'figma:asset/7f668e210343a08aa0103ba352df8bce67d2202c.png';
+import stepImg02 from 'figma:asset/8f9c9d62d76df3a62d68d523cc56c18eff620824.png';
+import stepImg03 from 'figma:asset/766a458d86dbac42cdb6e4cf1fb3ffd9bacfb381.png';
+import logoColorful from 'figma:asset/3708841680927d1f84aca8553afa7881232456f9.png';
+import logoWhite from 'figma:asset/f94892723fbbb0a4f2f32308df8ee1f6af782af3.png';
 
 const STEP_IMAGES = [stepImg01, stepImg02, stepImg03];
 
@@ -100,8 +100,8 @@ const GLOW_STYLES = `
   }
 `;
 
-import heroMockupImage from '@/assets/b45db7ab8c674ad92483b802f10a9128a075e418.png';
-import baseTributariaImage from '@/assets/2a1242c933acca66d9023ad40b5fa722a3766521.png';
+import heroMockupImage from 'figma:asset/b45db7ab8c674ad92483b802f10a9128a075e418.png';
+import baseTributariaImage from 'figma:asset/2a1242c933acca66d9023ad40b5fa722a3766521.png';
 
 /* ── Viewport config: once:false so elements re-animate on scroll back ── */
 const VP = { once: false, margin: '-60px' } as const;
@@ -159,24 +159,24 @@ export default function App() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center" style={{ paddingTop: '150px', paddingBottom: '56px' }}>
           <motion.h1
             className="lato-bold text-white mb-6"
-            style={{ fontSize: 'clamp(2.2rem, 5.5vw, 4.6rem)', letterSpacing: '-1.6px', lineHeight: 1.08 }}
+            style={{ fontSize: 'clamp(2.2rem, 5.5vw, 4.2rem)', letterSpacing: '-1.6px', lineHeight: 1.1 }}
             initial={{ opacity: 0, y: 22, filter: 'blur(12px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Decisões mais inteligentes<br />para competir e vencer
+            Da busca da licitação até a planilha de comprovação:<br />tudo numa só plataforma.
           </motion.h1>
           <motion.p
-            className="text-white/75 max-w-[420px] mx-auto mb-10 leading-relaxed"
+            className="text-white/75 max-w-[540px] mx-auto mb-10 leading-relaxed"
             style={{ fontSize: '1rem' }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
-            Centralize o pricing, simulações e operação de propostas em uma experiência mais segura, estratégica e auditável.
+            O PricePilot encontra as licitações certas pra sua empresa, monta a proposta com todos os cálculos, mostra se o preço vai dar lucro e ainda exporta a planilha de comprovação no padrão do órgão. Você cadastra uma vez e a plataforma trabalha por você em cada nova proposta.
           </motion.p>
           <motion.div className="flex justify-center" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}>
-            <PilotButton href="#cta" size="lg" variant="ghost">Começar grátis</PilotButton>
+            <PilotButton href="#cta" size="lg" variant="ghost">Começar grátis agora</PilotButton>
           </motion.div>
         </div>
 
@@ -190,13 +190,10 @@ export default function App() {
             transition={{ opacity: { duration: 1.1 }, filter: { duration: 1.1 }, y: { delay: 1.1, duration: 4.5, repeat: Infinity, ease: 'easeInOut' } }}
           />
         </motion.div>
-
-
       </section>
 
       {/* ── SECTION 2 · 5 PROBLEMS ── */}
       <section id="problemas" className="relative py-24 bg-white overflow-hidden">
-        {/* Bridges */}
         <div className="pp-bridge-top" style={{ background: 'linear-gradient(to bottom, rgba(6,1,24,0.6) 0%, transparent 100%)' }} />
         <div className="pp-bridge-bottom" />
 
@@ -205,19 +202,19 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8">
           <motion.div className="mb-14" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP} transition={{ duration: 0.7, ease: 'easeOut' }}>
             <h2 className="lato-bold text-[clamp(2rem,4vw,3.2rem)] text-[#0D1A34]">
-              5 problemas que{' '}
-              <span className="text-[#1D4CD1]">custam caro</span>{' '}
-              na sua operação
+              Você faz tudo isso{' '}
+              <span className="text-[#1D4CD1]">na mão?</span>{' '}
+              Então já sabe o quanto custa.
             </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[
-              { label: 'PROBLEMA 01', icon: Files, title: 'Planilhas isoladas e sem controle de versão', desc: 'Cada proposta é um arquivo solto, sem rastreabilidade nem histórico consolidado.' },
-              { label: 'PROBLEMA 02', icon: ShieldAlert, title: 'Governança fiscal manual e suscetível a erro', desc: 'CNAE, Simples, CPRB, PIS/COFINS — tudo calculado na mão, sob pressão.' },
-              { label: 'PROBLEMA 03', icon: BarChart2, title: 'Simulação de cenários feita no "achômetro"', desc: 'Testar margem, BDI e risco demanda retrabalho em múltiplas cópias de arquivo.' },
-              { label: 'PROBLEMA 04', icon: SearchCheck, title: 'Ausência de auditoria e rastreabilidade', desc: 'Se o TCU bater na porta, você tem registro completo de como cada preço foi formado?' },
-              { label: 'PROBLEMA 05', icon: Users, title: 'Equipe presa em tarefas operacionais', desc: 'Seu time gasta mais tempo formatando planilhas do que analisando estratégia.' },
+              { label: 'PROBLEMA 01', icon: SearchCheck, title: 'Procurar licitação é um trabalho invisível', desc: 'Você gasta horas vasculhando portais pra achar oportunidades. Muitas nem fazem sentido pro seu CNAE ou porte. O tempo que você perde filtrando é tempo que não está montando proposta.' },
+              { label: 'PROBLEMA 02', icon: Files, title: 'Toda proposta começa do zero', desc: 'Cada novo pregão você preenche os mesmos dados de novo: CNAE, alíquotas, equipe, uniformes, benefícios, encargos. Se mudou um número e esqueceu de atualizar na planilha, o erro vai junto.' },
+              { label: 'PROBLEMA 03', icon: BarChart2, title: 'Cálculos feitos na mão, debaixo de pressão', desc: 'Impostos, INSS patronal, encargos trabalhistas, VR, VT, uniformes, EPI, ferramentas. Tudo calculado na raça dentro de uma planilha. Um número errado e a proposta inteira fica comprometida.' },
+              { label: 'PROBLEMA 04', icon: ShieldAlert, title: 'Você não sabe se vai dar lucro até ganhar', desc: 'Sem uma análise clara da margem, você envia a proposta no escuro. Quando ganha e começa a executar, descobre que o preço não cobre os custos. Resultado: prejuízo, multa ou suspensão por até 5 anos.' },
+              { label: 'PROBLEMA 05', icon: Users, title: 'Depois de ganhar, a dor de cabeça continua', desc: 'O órgão pede a planilha de comprovação dos cálculos, e você precisa montar tudo na mão, no formato que eles exigem. Mais horas perdidas, mais risco de erro.' },
             ].map((p, i) => {
               const Icon = p.icon;
               return (
@@ -255,8 +252,7 @@ export default function App() {
       </section>
 
       {/* ── SECTION 3 · POSITIONING ── */}
-      <section className="relative py-24 overflow-hidden pp-animated-bg">
-        {/* Top bridge from Problems white */}
+      <section id="solucao" className="relative py-24 overflow-hidden pp-animated-bg">
         <div className="pp-bridge-top-md" style={{ background: 'linear-gradient(to bottom, white 0%, transparent 100%)' }} />
 
         <div className="absolute inset-0 pointer-events-none mx-[0px] my-[4px]" style={{ background: 'radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(8,10,60,0.55) 100%)' }} />
@@ -308,16 +304,16 @@ export default function App() {
             <motion.div initial={{ opacity: 0, x: 48 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}>
               <p className="font-mono text-xs tracking-[0.2em] uppercase mb-5" style={{ color: '#4d8df7' }}>[ Plataforma ]</p>
               <h2 className="lato-bold text-white mb-6" style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)', lineHeight: 1.12, letterSpacing: '-0.5px' }}>
-                Precificação inteligente para quem compete em licitações
+                Uma plataforma completa: da busca da licitação até a comprovação do preço
               </h2>
               <p className="text-white/60 mb-10 leading-relaxed">
-                PricePilot centraliza pricing, simulações e operação de propostas em uma experiência mais segura, estratégica e auditável — do cálculo fiscal ao envio.
+                O PricePilot cuida de cada etapa do processo. Você cadastra uma vez e a plataforma trabalha por você em todas as propostas.
               </p>
               <ul className="space-y-4 mb-10">
                 {[
-                  { icon: ShieldCheck, text: 'Governança fiscal automática — CNAE, Simples, CPRB, PIS/COFINS' },
-                  { icon: BarChart2,   text: 'Simulação de cenários em tempo real com comparativo de BDI e margem' },
-                  { icon: Zap,         text: 'Auditoria completa e rastreável, pronta para fiscalização do TCU' },
+                  { icon: SearchCheck, text: 'Filtro inteligente — só as licitações que fazem sentido pro seu CNAE e porte' },
+                  { icon: BarChart2,   text: 'Análise de margem em tempo real — você sabe se vai dar lucro antes de enviar' },
+                  { icon: Zap,         text: 'Exportação automática da planilha de comprovação no padrão do órgão' },
                 ].map(({ icon: Icon, text }, i) => (
                   <motion.li key={i} className="flex items-start gap-3" initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP} transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 + i * 0.1 }}>
                     <span className="mt-0.5 w-7 h-7 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,76,209,0.25)', border: '1px solid rgba(29,76,209,0.4)' }}>
@@ -333,8 +329,6 @@ export default function App() {
             </motion.div>
           </div>
         </div>
-
-
       </section>
 
       {/* ── SECTION 4 · SOCIAL PROOF ── */}
@@ -342,7 +336,6 @@ export default function App() {
 
       {/* ── SECTION 5 · HOW IT WORKS ── */}
       <section id="como-funciona" className="relative overflow-hidden pp-animated-bg px-[21px] py-[80px]">
-        {/* Top bridge from Testimonials white */}
         <div className="pp-bridge-top-md" style={{ background: 'linear-gradient(to bottom, white 0%, transparent 100%)' }} />
 
         <div className="absolute pointer-events-none" style={{ top: '-80px', right: '10%', width: '480px', height: '480px', background: 'radial-gradient(circle, rgba(29,76,209,0.35) 0%, transparent 70%)', filter: 'blur(60px)' }} />
@@ -351,16 +344,16 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-10">
           <motion.div className="mb-14" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP} transition={{ duration: 0.65, ease: 'easeOut' }}>
             <p className="font-mono text-xs tracking-[0.2em] uppercase mb-4" style={{ color: 'rgba(255,255,255,0.45)' }}>[ Como funciona ]</p>
-            <h2 className="lato-bold text-white" style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)', letterSpacing: '-0.5px', lineHeight: 1.12, maxWidth: '560px' }}>
-              Em 3 passos, sua operação de propostas vira estratégia.
+            <h2 className="lato-bold text-white" style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)', letterSpacing: '-0.5px', lineHeight: 1.12, maxWidth: '600px' }}>
+              5 etapas. Do zero à proposta pronta, com lucro garantido.
             </h2>
           </motion.div>
 
           <div className="space-y-5">
             {[
-              { num: '01', title: 'Configure a base fiscal da empresa', headline: 'Sua base fiscal fica organizada, sem depender de planilha.', desc: 'Defina CNAE, regime tributário, alíquotas e CPRB uma única vez. O sistema passa a usar essa referência em todas as propostas — com consistência e conformidade automáticas.', tags: ['Base Fiscal', 'Onboarding'], img: 'https://images.unsplash.com/photo-1762427354397-854a52e0ded7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXglMjBkb2N1bWVudHMlMjBidXNpbmVzcyUyMHNwcmVhZHNoZWV0fGVufDF8fHx8MTc3NTY4MTg2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-              { num: '02', title: 'Monte a proposta com simulação em tempo real', headline: 'Simule cenários fiscais e defina a margem ideal antes de enviar.', desc: 'Insira itens, custos e margens. O PricePilot calcula impostos, BDI e preço final automaticamente. Teste quantos cenários quiser em segundos.', tags: ['Simulação', 'Precificação'], img: 'https://images.unsplash.com/photo-1759661966728-4a02e3c6ed91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGRhdGElMjBkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzc1NjgxODY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
-              { num: '03', title: 'Exporte, audite e aprenda com cada disputa', headline: 'Rastreabilidade completa, pronta para o TCU.', desc: 'Gere relatórios auditáveis, exporte para Excel ou PDF e mantenha histórico completo de cada decisão. Cada proposta se transforma em inteligência estratégica para as próximas licitações.', tags: ['Auditoria', 'Exportação'], img: 'https://images.unsplash.com/photo-1578016981482-d4dd3db297b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdWRpdCUyMHJlcG9ydCUyMGZpbmFuY2lhbCUyMGRvY3VtZW50JTIwZXhwb3J0fGVufDF8fHx8MTc3NTY4MTg2OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
+              { num: '01', title: 'Cadastre sua empresa e equipe uma única vez', headline: 'Você faz isso uma vez. O sistema usa pra sempre.', desc: 'Informe o CNAE, regime tributário e alíquotas. Cadastre cada funcionário com salário, uniforme, EPI, VR, VT, ferramentas e encargos. A partir daqui, o PricePilot já tem tudo que precisa pra calcular qualquer proposta.', tags: ['Cadastro único', 'Equipe', 'Configuração'], img: 'https://images.unsplash.com/photo-1762427354397-854a52e0ded7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YXglMjBkb2N1bWVudHMlMjBidXNpbmVzcyUyMHNwcmVhZHNoZWV0fGVufDF8fHx8MTc3NTY4MTg2Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
+              { num: '02', title: 'Veja as licitações que fazem sentido pra você', headline: 'Sem perder tempo nos portais.', desc: 'O PricePilot filtra as oportunidades com base no perfil da sua empresa. Você vê apenas as licitações que têm potencial real de participar, e escolhe quais quer montar proposta.', tags: ['Filtro inteligente', 'Oportunidades', 'Seleção'], img: 'https://images.unsplash.com/photo-1759661966728-4a02e3c6ed91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGRhdGElMjBkYXNoYm9hcmQlMjBhbmFseXRpY3N8ZW58MXx8fHwxNzc1NjgxODY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
+              { num: '03', title: 'Monte a proposta com preço completo na hora', headline: 'Sem achismo. O preço certo aparece na tela.', desc: 'Adicione os itens do edital, selecione a equipe, defina sua margem. Impostos, encargos e preço final calculados de forma automática. Simule diferentes cenários antes de decidir.', tags: ['Proposta', 'Precificação', 'Simulação'], img: 'https://images.unsplash.com/photo-1578016981482-d4dd3db297b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdWRpdCUyMHJlcG9ydCUyMGZpbmFuY2lhbCUyMGRvY3VtZW50JTIwZXhwb3J0fGVufDF8fHx8MTc3NTY4MTg2OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral' },
             ].map((step, i) => (
               <motion.div
                 key={step.num}
@@ -414,7 +407,6 @@ export default function App() {
                         }
                       }}
                     />
-                    
                   </div>
                 </div>
               </motion.div>
@@ -443,10 +435,10 @@ export default function App() {
           </motion.div>
 
           <motion.h2 className="lato-bold text-white text-center mb-4" style={{ fontSize: 'clamp(1.9rem, 4vw, 2.75rem)', letterSpacing: '-0.5px', lineHeight: 1.12 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP} transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 }}>
-            Planos flexíveis para crescer
+            Escolha o plano que cabe no ritmo da sua empresa
           </motion.h2>
           <motion.p className="text-center mx-auto mb-10" style={{ color: 'rgba(230,236,255,0.62)', fontSize: '1rem', lineHeight: 1.7, maxWidth: '440px' }} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP} transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}>
-            Invista menos do que custa um único erro fiscal — e escale conforme sua operação cresce.
+            Comece grátis. Cresça conforme participar de mais licitações.
           </motion.p>
 
           {/* Toggle */}
@@ -478,7 +470,7 @@ export default function App() {
                 <a href="#cta" style={{ display: 'block', background: 'rgba(29,76,209,0.55)', backdropFilter: 'blur(8px)', border: '1px solid rgba(138,165,255,0.35)', borderRadius: '10px', padding: '10px 18px', color: 'white', textAlign: 'center', fontSize: '0.95rem', textDecoration: 'none', marginBottom: '24px', cursor: 'pointer', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Começar grátis</a>
                 <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', marginBottom: '14px', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Incluído:</div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '11px', flex: 1 }}>
-                  {['Até 5 propostas/mês','Governança fiscal básica','1 usuário','Suporte por e-mail'].map(f => (
+                  {['Até 5 propostas/mês','Cálculo básico de impostos','Filtro de licitações','1 usuário','Suporte por e-mail'].map(f => (
                     <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
                       <Check style={{ width: '15px', height: '15px', color: '#6B9EFF', flexShrink: 0 }} />
                       <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem' }}>{f}</span>
@@ -495,7 +487,7 @@ export default function App() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '18px' }}>
                   <span className="lato-bold" style={{ color: 'white', fontSize: '1rem' }}>Pro</span>
                   <div style={{ background: 'rgba(133,77,255,0.55)', border: '1px solid rgba(167,139,250,0.4)', borderRadius: '99px', padding: '3px 12px' }}>
-                    <span style={{ color: 'white', fontSize: '0.75rem', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Popular</span>
+                    <span style={{ color: 'white', fontSize: '0.75rem', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Mais popular</span>
                   </div>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '20px' }}>
@@ -505,7 +497,7 @@ export default function App() {
                 <a href="#cta" style={{ display: 'block', background: 'linear-gradient(135deg,rgba(29,76,209,0.8),rgba(133,77,255,0.8))', backdropFilter: 'blur(8px)', border: '1px solid rgba(138,165,255,0.35)', borderRadius: '10px', padding: '10px 18px', color: 'white', textAlign: 'center', fontSize: '0.95rem', textDecoration: 'none', marginBottom: '24px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(133,77,255,0.3)', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Começar agora</a>
                 <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', marginBottom: '14px', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Incluído:</div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '11px', flex: 1 }}>
-                  {['Propostas ilimitadas','Governança fiscal completa','Até 5 usuários','Simulação avançada de cenários','Auditoria e rastreabilidade','Suporte prioritário'].map(f => (
+                  {['Propostas ilimitadas','Cálculo completo (impostos + encargos)','Filtro de licitações avançado','Cadastro completo de funcionários','Análise de margem em tempo real','Exportação automática no padrão do órgão','Até 5 usuários','Histórico completo','Suporte prioritário'].map(f => (
                     <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
                       <Check style={{ width: '15px', height: '15px', color: '#6B9EFF', flexShrink: 0 }} />
                       <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem' }}>{f}</span>
@@ -520,12 +512,12 @@ export default function App() {
               <div style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', borderRadius: '17px', padding: '24px', height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <div className="lato-bold" style={{ color: 'white', fontSize: '1rem', marginBottom: '18px' }}>Enterprise</div>
                 <div style={{ marginBottom: '20px' }}>
-                  <span className="lato-bold" style={{ color: 'white', fontSize: '2.75rem', letterSpacing: '-0.04em', lineHeight: 1 }}>Custom</span>
+                  <span className="lato-bold" style={{ color: 'white', fontSize: '2.75rem', letterSpacing: '-0.04em', lineHeight: 1 }}>Sob consulta</span>
                 </div>
                 <a href="#cta" style={{ display: 'block', background: 'rgba(29,76,209,0.55)', backdropFilter: 'blur(8px)', border: '1px solid rgba(138,165,255,0.35)', borderRadius: '10px', padding: '10px 18px', color: 'white', textAlign: 'center', fontSize: '0.95rem', textDecoration: 'none', marginBottom: '24px', cursor: 'pointer', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Falar com vendas</a>
                 <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.72rem', marginBottom: '14px', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Incluído:</div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '11px', flex: 1 }}>
-                  {['Tudo do Professional','Usuários ilimitados','Integrações personalizadas','Onboarding dedicado','SLA garantido','Suporte 24/7'].map(f => (
+                  {['Tudo do plano Pro','Usuários ilimitados','Integrações personalizadas','Configuração assistida','Atendimento dedicado','Suporte 24/7'].map(f => (
                     <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
                       <Check style={{ width: '15px', height: '15px', color: '#6B9EFF', flexShrink: 0 }} />
                       <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem' }}>{f}</span>
@@ -539,17 +531,14 @@ export default function App() {
           {/* Value anchor */}
           <motion.div className="mt-12 p-6 rounded-xl text-center max-w-3xl mx-auto" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={VP} transition={{ duration: 0.6, ease: 'easeOut' }}>
             <p style={{ color: 'rgba(230,236,255,0.7)', fontSize: '0.95rem', lineHeight: 1.75 }}>
-              <strong style={{ color: 'rgba(138,165,255,0.95)', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Um único erro fiscal</strong> pode custar dezenas de milhares de reais e desqualificar sua empresa. O PricePilot custa menos que uma hora de consultoria tributária — e trabalha para você 24/7.
+              <strong style={{ color: 'rgba(138,165,255,0.95)', fontFamily: 'Lato, sans-serif', fontWeight: 700 }}>Um único erro de preço</strong> pode tirar sua empresa do mercado por até 5 anos. O PricePilot custa menos que uma hora de assessoria contábil — e trabalha por você em cada proposta.
             </p>
           </motion.div>
         </div>
-
-
       </section>
 
       {/* ── SECTION 8 · FAQ ── */}
       <section id="faq" className="relative py-20 md:py-32 bg-gray-50 overflow-hidden">
-        {/* Bridges */}
         <div className="pp-bridge-top" style={{ background: 'linear-gradient(to bottom, rgba(6,1,24,0.55) 0%, transparent 100%)' }} />
         <div className="pp-bridge-bottom" />
 
@@ -577,12 +566,14 @@ export default function App() {
             {/* Right accordion */}
             <motion.div className="space-y-3" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={VP} transition={{ duration: 0.65, ease: 'easeOut', delay: 0.1 }}>
               {[
-                { q: 'O PricePilot substitui minhas planilhas de Excel?', a: 'Sim e não. O PricePilot centraliza toda a lógica de formação de preços, governança fiscal e simulação de cenários. Você pode continuar exportando para Excel quando precisar de um relatório final, mas a gestão estratégica acontece na plataforma.' },
-                { q: 'Como funciona a governança fiscal automática?', a: 'Você configura a base fiscal da empresa uma vez (CNAE, regime tributário, alíquotas, CPRB). A partir daí, o sistema aplica automaticamente as regras corretas em cada proposta, calculando impostos, margens e preços finais com precisão.' },
-                { q: 'Posso testar antes de assinar?', a: 'Sim! O plano Starter é gratuito e permite até 5 propostas por mês. Você pode testar toda a lógica fiscal, simulação básica e exportação sem compromisso.' },
-                { q: 'O sistema atende a Lei de Licitações (14.133/2021)?', a: 'Sim. O PricePilot foi desenvolvido com base nas exigências da Nova Lei de Licitações e mantém auditoria completa de cada proposta, garantindo rastreabilidade e conformidade.' },
-                { q: 'Minha equipe precisa de treinamento?', a: 'O PricePilot foi desenhado para ser intuitivo. A maioria dos usuários começa a operar em menos de 1 hora. No plano Enterprise, oferecemos onboarding dedicado para times maiores.' },
-                { q: 'Posso importar minhas planilhas antigas?', a: 'No plano Professional e Enterprise, oferecemos importação assistida de bases de custos e histórico de propostas. Entre em contato com nosso time de onboarding.' },
+                { q: 'O que o PricePilot faz exatamente?', a: 'O PricePilot é uma plataforma completa pra quem participa de licitações. Ele encontra as licitações certas pra sua empresa, monta a proposta com todos os cálculos (impostos, encargos, benefícios, margem), mostra em tempo real se o preço vai dar lucro e, depois que você ganha, exporta a planilha de comprovação no padrão exigido pelo órgão.' },
+                { q: 'O PricePilot substitui minha planilha?', a: 'Sim. Você não precisa mais montar proposta em planilha. Todos os cálculos são feitos dentro da plataforma. Se quiser exportar pra Excel no final, pode. Mas a dor de cabeça de montar tudo na mão acaba.' },
+                { q: 'Como funciona o filtro de licitações?', a: 'O sistema analisa o perfil da sua empresa e mostra as licitações que fazem sentido pra você participar. Em vez de procurar nos portais, você abre o PricePilot e já vê as oportunidades reais.' },
+                { q: 'Eu consigo cadastrar meus funcionários com todos os custos?', a: 'Sim. Você cadastra cada funcionário com salário, uniforme, EPI, VR, VT, ferramentas de trabalho e encargos. Quando for montar uma proposta, é só selecionar a equipe. O cálculo sai completo na hora.' },
+                { q: 'O que é a análise de margem em tempo real?', a: 'Enquanto você monta a proposta, o sistema mostra se o preço está dentro de uma margem de lucro segura. Se a margem ficar apertada ou negativa, você vê na hora e pode ajustar antes de enviar.' },
+                { q: 'Preciso cadastrar tudo de novo a cada proposta?', a: 'Não. Esse é o grande diferencial. Você cadastra os dados da empresa e da equipe uma única vez. A partir daí, cada nova proposta já puxa esses dados automaticamente. Quanto mais você usa, mais rápido fica.' },
+                { q: 'Como funciona a exportação da planilha de comprovação?', a: 'Depois que você ganha a licitação, o PricePilot gera a planilha de comprovação dos cálculos no padrão que o órgão exige. É tudo automático, usando os dados que você já preencheu. Só baixar e entregar.' },
+                { q: 'Posso testar antes de pagar?', a: 'Sim. O plano gratuito permite montar até 5 propostas por mês. Você já consegue ver como o sistema funciona na prática, sem cartão de crédito.' },
               ].map((faq, i) => (
                 <motion.div
                   key={i}
@@ -619,7 +610,6 @@ export default function App() {
 
       {/* ── SECTION 9 · FINAL CTA ── */}
       <section id="cta" className="relative py-24 overflow-hidden pp-animated-bg">
-        {/* Top bridge from FAQ white */}
         <div className="pp-bridge-top-md" style={{ background: 'linear-gradient(to bottom, #f9fafb 0%, transparent 100%)' }} />
 
         <div className="absolute pointer-events-none" style={{ top: '20%', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '600px', background: 'radial-gradient(ellipse, rgba(29,76,209,0.3) 0%, transparent 70%)', filter: 'blur(80px)' }} />
@@ -633,7 +623,7 @@ export default function App() {
             viewport={VP}
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
-            Pare de perder licitações<br />por erro de planilha
+            Tudo o que sua empresa precisa<br />pra licitar com segurança, num só lugar
           </motion.h2>
           <motion.p
             className="text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto"
@@ -643,7 +633,7 @@ export default function App() {
             viewport={VP}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
           >
-            Você escolhe: continuar com planilhas e aceitar o risco — ou usar o PricePilot e operar com precisão estratégica.
+            Encontrar a licitação certa. Montar a proposta completa. Saber se vai dar lucro. Exportar a comprovação no padrão do órgão. Tudo isso sem planilha, sem retrabalho e sem surpresa na hora de executar o contrato.
           </motion.p>
 
           <motion.div className="mb-12" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={VP} transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}>
@@ -669,7 +659,7 @@ export default function App() {
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.16)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.10)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
             >
-              Começar gratuitamente agora
+              Começar grátis agora
               <span style={{ fontSize: '1.1em' }}>→</span>
             </a>
           </motion.div>
@@ -695,7 +685,7 @@ export default function App() {
               <div className="flex items-center gap-2 mb-4">
                 <img src={logoWhite} alt="PricePilot" className="w-auto h-[32px]" />
               </div>
-              <p className="text-white/60 text-sm leading-relaxed">Seu copiloto de preços para licitações públicas.</p>
+              <p className="text-white/60 text-sm leading-relaxed">Seu copiloto de preços para licitações públicas. Feito por quem viveu o problema.</p>
             </div>
             {[
               { title: 'Produto', links: [['Funcionalidades','#'],['Preços','#preco'],['Cases','#'],['Atualizações','#']] },

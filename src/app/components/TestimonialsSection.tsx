@@ -27,80 +27,80 @@ function InitialsAvatar({ name, size = 36, className = '' }: { name: string; siz
 }
 
 /* ─────────────────────────────────────────────
-   DATA
+   DATA — v3 texts from PricePilot doc
 ───────────────────────────────────────────── */
 const featured = [
   {
     name: 'Carlos Mendes',
-    role: 'Diretor Comercial',
-    company: 'Construtora Horizonte S/A',
+    role: 'Sócio',
+    company: 'CM Serviços Ltda',
     quote:
-      'Antes do PricePilot, cada proposta era uma luta de 3 dias. Hoje fechamos em 6 horas, com muito mais confiança nos números fiscais. A governança automática foi um divisor de águas.',
-    result: '65% de redução no tempo de preparação',
+      'Eu gastava meio dia só procurando licitação nos portais. Agora abro o PricePilot e já vejo as oportunidades que fazem sentido pro meu CNAE. Cadastrei minha equipe uma vez e cada proposta sai em menos de uma hora.',
+    result: 'De 3 para 12 licitações por mês',
   },
   {
     name: 'Mariana Silva',
-    role: 'CFO',
-    company: 'Infratech Serviços Ltda',
+    role: 'Sócia',
+    company: 'MS Tecnologia',
     quote:
-      'Eliminamos os erros de cálculo de CPRB e PIS/COFINS de uma vez. Nosso time parou de retrabalhar planilhas e passou a focar em estratégia comercial de verdade.',
-    result: '100% de conformidade fiscal garantida',
+      'A análise de margem me salvou. Ia enviar uma proposta de manutenção que parecia boa, mas o sistema mostrou que a margem estava negativa. Ajustei antes de enviar e ganhei com lucro.',
+    result: 'Zero propostas enviadas no prejuízo',
   },
   {
     name: 'Roberto Alves',
-    role: 'Sócio-fundador',
-    company: 'GovServ Consultoria',
+    role: 'Diretor',
+    company: 'RA Fornecimentos',
     quote:
-      'Simular cenários de margem e BDI virou rotina. Agora a gente consegue otimizar cada proposta e aumentar nossa competitividade sem precisar abrir uma planilha sequer.',
-    result: '40% mais propostas vencedoras',
+      'A planilha de comprovação sai automática. Parei de perder horas montando na mão. O órgão pede, eu baixo e entrego. Simples assim.',
+    result: 'Horas economizadas a cada contrato ganho',
   },
 ];
 
 const allTestimonials = [
   {
-    text: 'Antes do PricePilot, cada proposta era uma batalha. Hoje fechamos em horas com muito mais confiança nos números.',
+    text: 'Eu gastava meio dia só procurando licitação nos portais. Agora abro o PricePilot e já vejo as oportunidades que fazem sentido pro meu CNAE.',
     name: 'Carlos Mendes',
-    role: 'Diretor Comercial · Construtora Horizonte',
+    role: 'Sócio · CM Serviços Ltda',
   },
   {
-    text: 'A governança fiscal automática foi um divisor de águas. Eliminamos erros e ganhamos agilidade estratégica.',
+    text: 'A análise de margem me salvou. Ia enviar uma proposta que parecia boa, mas o sistema mostrou que a margem estava negativa. Ajustei e ganhei com lucro.',
     name: 'Mariana Silva',
-    role: 'CFO · Infratech Serviços',
+    role: 'Sócia · MS Tecnologia',
   },
   {
-    text: 'Simular cenários virou rotina. Aumentamos nossas propostas vencedoras em mais de 40% no primeiro trimestre.',
+    text: 'A planilha de comprovação sai automática. Parei de perder horas montando na mão. O órgão pede, eu baixo e entrego.',
     name: 'Roberto Alves',
-    role: 'Sócio · GovServ Consultoria',
+    role: 'Diretor · RA Fornecimentos',
   },
   {
-    text: 'Compliance com a Lei 14.133 finalmente resolvido. Toda a rastreabilidade que o TCU exige está ali, automática.',
+    text: 'O filtro de licitações me mostra só o que faz sentido pro meu porte. Economizo horas por semana que antes perdia vasculhando portais.',
     name: 'Ana Paula Costa',
-    role: 'Gerente de Contratos · Infraobras S/A',
+    role: 'Sócia · AP Suprimentos',
   },
   {
-    text: 'Nossa equipe dobrou de produtividade. O tempo que perdíamos com planilhas agora vai direto para análise estratégica.',
+    text: 'Comecei a usar no mesmo dia. Na primeira proposta já vi a diferença. O sistema é simples e o cálculo sai completo na hora.',
     name: 'João Ferreira',
-    role: 'CEO · TecGov Soluções',
+    role: 'Diretor · JF Serviços Técnicos',
   },
   {
-    text: 'Exportar para Excel com toda a memória de cálculo pronta é incrível. Os auditores adoraram.',
+    text: 'Exportei a comprovação em PDF e o pregoeiro elogiou a clareza da planilha. Nunca mais precisei montar nada na mão.',
     name: 'Patrícia Souza',
-    role: 'Diretora Financeira · Logi-Tech',
+    role: 'Diretora · PS Consultoria',
   },
   {
-    text: 'Subir a base fiscal uma vez e nunca mais precisar reconfigurar. Esse detalhe sozinho já pagou o plano.',
+    text: 'Atualizei o preço do uniforme uma vez e todas as propostas novas já saíram com o valor certo. Isso economiza horas de retrabalho.',
     name: 'Fernando Lima',
-    role: 'Analista de Licitações · DataConstr',
+    role: 'Sócio · FL Licitações',
   },
   {
-    text: 'O PricePilot transformou nosso setor comercial. Agora competimos de igual para igual com empresas muito maiores.',
+    text: 'Eu achava que não dava pra competir com empresa grande. Agora tenho a mesma tecnologia e ganho licitações que antes nem tentava.',
     name: 'Camila Rocha',
-    role: 'Controller · ViaObras',
+    role: 'MEI · CR Materiais',
   },
   {
-    text: 'Implantamos em um dia. Na segunda proposta já recuperamos o investimento do mês. Produto simplesmente excelente.',
+    text: 'Recuperei o investimento na segunda proposta. A análise de margem mostrou onde eu deixava dinheiro na mesa toda vez.',
     name: 'Marcos Oliveira',
-    role: 'Diretor Comercial · SysGov',
+    role: 'Sócio · MO Soluções',
   },
 ];
 
@@ -174,9 +174,6 @@ function ProfileCarousel() {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {/* Desktop */}
-      
-
       {/* Mobile */}
       <div className="md:hidden">
         <div className="flex justify-center mb-6">
@@ -211,9 +208,6 @@ function ProfileCarousel() {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* Navigation */}
-      
     </div>
   );
 }
@@ -224,8 +218,6 @@ function ProfileCarousel() {
 export function TestimonialsSection() {
   return (
     <section className="relative py-20 bg-white overflow-hidden">
-
-
       <div className="absolute top-20 left-0 w-96 h-96 bg-[#1D4CD1] opacity-5 blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-20 right-0 w-96 h-96 bg-[#1D4CD1] opacity-5 blur-3xl rounded-full pointer-events-none" />
 
@@ -234,9 +226,9 @@ export function TestimonialsSection() {
         {/* Stats */}
         <div className="grid sm:grid-cols-3 gap-8 mb-20">
           {[
-            { value: '70%', label: 'Redução no tempo de preparação' },
-            { value: '100%', label: 'Conformidade fiscal garantida' },
-            { value: '250+', label: 'Propostas processadas mensalmente' },
+            { value: '4x', label: 'Mais licitações com a mesma equipe' },
+            { value: '0', label: 'Erros de cálculo nas propostas' },
+            { value: '250+', label: 'Propostas montadas todo mês' },
           ].map(({ value, label }) => (
             <motion.div key={value} className="text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, margin: '-60px' }} transition={{ duration: 0.6 }}>
               <div className="lato-bold text-5xl sm:text-6xl text-[#1D4CD1] mb-2">{value}</div>
@@ -250,9 +242,9 @@ export function TestimonialsSection() {
           <div className="inline-block border px-4 py-1 rounded-lg text-sm text-[#1D4CD1] mb-4" style={{ borderColor: 'rgba(29,76,209,0.3)', background: 'rgba(29,76,209,0.05)', backdropFilter: 'blur(8px)' }}>
             Depoimentos
           </div>
-          <h2 className="lato-bold text-3xl sm:text-4xl lg:text-5xl text-[#0D1A34] mb-4">O que dizem nossos clientes</h2>
+          <h2 className="lato-bold text-3xl sm:text-4xl lg:text-5xl text-[#0D1A34] mb-4">Empresas que pararam de perder tempo e começaram a lucrar de verdade</h2>
           <p className="text-gray-500 text-base max-w-2xl mx-auto leading-relaxed">
-            Empresas que transformaram a operação de licitações com o PricePilot
+            MEIs, MEs e EPPs de facilities, manutenção e serviços que usam o PricePilot no dia a dia
           </p>
         </motion.div>
 

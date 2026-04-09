@@ -1,4 +1,4 @@
-import imgAuralisLogoWhite from "@/assets/9ce51a590f8058c94d6c348050a680a8738c1552.png";
+import imgAuralisLogoWhite from "figma:asset/9ce51a590f8058c94d6c348050a680a8738c1552.png";
 
 function AuralisLogoWhite() {
   return (

@@ -2,19 +2,19 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'motion/react';
 
 const semItems = [
-  'Planilhas descoordenadas e propensas a erro humano',
-  'Cálculo manual de impostos, BDI e encargos fiscais',
-  'Sem rastreabilidade — vulnerável em qualquer auditoria',
-  'Horas perdidas recalculando itens do zero',
-  'Risco real de desclassificação por falha fiscal',
+  'Horas vasculhando portais pra achar oportunidades no seu CNAE',
+  'Toda proposta começa do zero — mesmos dados preenchidos de novo',
+  'Cálculos na raça: impostos, encargos, VR, VT, tudo na planilha',
+  'Você não sabe se vai dar lucro até ganhar e começar a executar',
+  'Planilha de comprovação montada na mão depois de ganhar',
 ];
 
 const comItems = [
-  'Propostas padronizadas, precisas e auditáveis',
-  'Cálculos automáticos de impostos, BDI e CPRB',
-  'Rastreabilidade completa pronta para o TCU',
-  'Simule múltiplos cenários em poucos minutos',
-  'Conformidade garantida em cada proposta enviada',
+  'Filtro inteligente: só as licitações que fazem sentido pra você',
+  'Cadastro único — cada nova proposta puxa os dados automaticamente',
+  'Cálculos automáticos: impostos, encargos e preço final na tela',
+  'Análise de margem em tempo real — você sabe antes de enviar',
+  'Exportação automática da comprovação no padrão do órgão',
 ];
 
 interface FlipCardProps {
@@ -96,7 +96,7 @@ function FlipCard({ type, items, rotateY }: FlipCardProps) {
               color: 'white', fontSize: 'clamp(1.5rem, 2.8vw, 2rem)',
               fontWeight: 300, letterSpacing: '-0.4px', lineHeight: 1.2,
             }}>
-              {isSem ? 'Operação arriscada e lenta' : 'Operação precisa e estratégica'}
+              {isSem ? 'Horas perdidas e incerteza' : 'A plataforma faz o trabalho pesado'}
             </h3>
           </div>
 
@@ -127,7 +127,7 @@ function FlipCard({ type, items, rotateY }: FlipCardProps) {
               color: 'white', fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
               fontWeight: 300, letterSpacing: '-0.3px', lineHeight: 1.2,
             }}>
-              {isSem ? 'Operação arriscada e lenta' : 'Operação precisa e estratégica'}
+              {isSem ? 'Horas perdidas e incerteza' : 'A plataforma faz o trabalho pesado'}
             </h3>
           </div>
 
@@ -163,7 +163,6 @@ export function ComparisonSection() {
     offset: ['start 85%', 'start 10%'],
   });
 
-  // Card 1 flips first, card 2 slightly after — both reverse when scrolling back up
   const card1Rotate = useTransform(scrollYProgress, [0, 0.9],  [0, 180]);
   const card2Rotate = useTransform(scrollYProgress, [0.12, 1], [0, 180]);
 
@@ -198,11 +197,11 @@ export function ComparisonSection() {
             fontSize: 'clamp(2rem, 3.5vw, 2.8rem)',
             letterSpacing: '-0.5px', lineHeight: 1.15,
           }}>
-            O que muda quando você usa{' '}
-            <span style={{ color: '#60a5fa', fontStyle: 'italic' }}>o PricePilot</span>
+            O que muda quando você para de{' '}
+            <span style={{ color: '#60a5fa', fontStyle: 'italic' }}>fazer tudo na mão</span>
           </h2>
           <p className="mt-4 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', lineHeight: 1.7 }}>
-            Veja a diferença entre operar no escuro e ter controle total sobre cada proposta.
+            De um lado, horas perdidas e incerteza. Do outro, uma plataforma que faz o trabalho pesado por você.
           </p>
         </motion.div>
 
