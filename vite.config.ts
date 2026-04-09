@@ -18,3 +18,17 @@ export default defineConfig({
   },
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })
+
+export default defineConfig({
+  base: '/Pricepilot/',
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
+  assetsInclude: ['**/*.svg', '**/*.csv'],
+})
