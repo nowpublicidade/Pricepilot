@@ -1,5 +1,5 @@
-import img9EJeyFceJGm62L9YWlTkTjbos8Png from "@/asset/a90848393a8c9a413cdb9109faa8e0ed0a6b17e1.png";
-import imgTextLogo from "@/asset/25e6020a4d35279c3c69da24da6b89cab589f063.png";
+import img9EJeyFceJGm62L9YWlTkTjbos8Png from "@/assets/a90848393a8c9a413cdb9109faa8e0ed0a6b17e1.png";
+import imgTextLogo from "@/assets/25e6020a4d35279c3c69da24da6b89cab589f063.png";
 
 function Component9EJeyFceJGm62L9YWlTkTjbos8Png() {
   return (
