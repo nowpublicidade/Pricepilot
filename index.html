@@ -2148,6 +2148,15 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
 
     const WEBHOOK = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
 
+    // Captura UTMs da URL ao carregar
+    function getUtms() {
+      const p = new URLSearchParams(window.location.search);
+      const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid'];
+      const utms = {};
+      keys.forEach(k => { if (p.get(k)) utms[k] = p.get(k); });
+      return utms;
+    }
+
     function openModal() {
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -2201,6 +2210,8 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
         return;
       }
 
+      const utms = getUtms();
+
       const payload = {
         nome,
         telefone: tel,
@@ -2211,7 +2222,8 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
         ja_licita:  document.getElementById('ppLicitacao').value,
         quer_teste: document.getElementById('ppTeste').value,
         pagina_url: window.location.href,
-        timestamp:  new Date().toISOString()
+        timestamp:  new Date().toISOString(),
+        ...utms
       };
 
       submitBtn.disabled = true;
@@ -2223,6 +2235,24 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+
+        // Meta Pixel: Lead
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: 'CTA Form',
+            ...utms
+          });
+        }
+
+        // Google Analytics: close_convert_lead
+        if (typeof gtag === 'function') {
+          gtag('event', 'close_convert_lead', {
+            event_category: 'lead',
+            email,
+            ...utms
+          });
+        }
+
         formWrap.style.display = 'none';
         success.classList.add('visible');
         setTimeout(closeModal, 4000);
