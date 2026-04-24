@@ -1033,6 +1033,123 @@
       border-radius: 99px; padding: 3px 12px;
       font-size: 12px; color: rgba(138,165,255,0.9); margin-left: 8px;
     }
+
+    /* =============================================
+       MODAL / POPUP FORMULÁRIO CTA
+    ============================================= */
+    .pp-modal-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(4,6,30,0.82);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .pp-modal-overlay.active {
+      opacity: 1; pointer-events: all;
+    }
+    .pp-modal {
+      background: linear-gradient(145deg, rgba(12,16,60,0.98), rgba(8,12,48,0.98));
+      border: 1px solid rgba(138,165,255,0.18);
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(29,76,209,0.15);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(.34,1.56,.64,1);
+    }
+    .pp-modal-overlay.active .pp-modal {
+      transform: translateY(0) scale(1);
+    }
+    .pp-modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.45); font-size: 22px; line-height: 1;
+      padding: 4px; transition: color 0.2s;
+    }
+    .pp-modal-close:hover { color: #fff; }
+    .pp-modal-header { margin-bottom: 28px; }
+    .pp-modal-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--blue-pale);
+      margin-bottom: 10px;
+    }
+    .pp-modal-header h3 {
+      font-size: 1.35rem; font-weight: 800; color: #fff;
+      line-height: 1.25; margin: 0 0 6px;
+    }
+    .pp-modal-header p {
+      font-size: 13px; color: rgba(255,255,255,0.5); margin: 0;
+    }
+    .pp-form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .pp-form-group {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .pp-form-group.full { grid-column: 1 / -1; }
+    .pp-form-group label {
+      font-size: 11.5px; font-weight: 600;
+      color: rgba(255,255,255,0.6); letter-spacing: 0.3px;
+    }
+    .pp-form-group input,
+    .pp-form-group select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: #fff; font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.2s, background 0.2s;
+      width: 100%; box-sizing: border-box;
+      -webkit-appearance: none; appearance: none;
+    }
+    .pp-form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .pp-form-group input::placeholder { color: rgba(255,255,255,0.28); }
+    .pp-form-group input:focus,
+    .pp-form-group select:focus {
+      border-color: rgba(29,76,209,0.7);
+      background: rgba(29,76,209,0.1);
+    }
+    .pp-form-group select option { background: #0c1040; color: #fff; }
+    .pp-form-submit {
+      width: 100%; margin-top: 20px;
+      padding: 15px; border: none; border-radius: 12px;
+      background: var(--blue); color: #fff;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.2px; font-family: inherit;
+      transition: background 0.2s, transform 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .pp-form-submit:hover { background: #1535a0; transform: translateY(-1px); }
+    .pp-form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .pp-modal-success {
+      text-align: center; padding: 20px 0;
+      display: none; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .pp-modal-success.visible { display: flex; }
+    .pp-modal-success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pp-modal-success h3 { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 0; }
+    .pp-modal-success p { font-size: 14px; color: rgba(255,255,255,0.55); margin: 0; }
+    .pp-form-error {
+      font-size: 12px; color: #f87171; margin-top: 12px; text-align: center; display: none;
+    }
+    @media (max-width: 540px) {
+      .pp-modal { padding: 28px 20px 24px; }
+      .pp-form-grid { grid-template-columns: 1fr; }
+      .pp-form-group.full { grid-column: 1; }
+    }
   </style>
 
 <!-- =============================================
@@ -2018,6 +2135,203 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
     });
   }
   positionOrbitItems();
+
+  /* ---- Modal CTA ---- */
+  (function () {
+    const overlay  = document.getElementById('ppModal');
+    const closeBtn = document.getElementById('ppModalClose');
+    const form     = document.getElementById('ppLeadForm');
+    const submitBtn= document.getElementById('ppSubmitBtn');
+    const errMsg   = document.getElementById('ppFormError');
+    const formWrap = document.getElementById('ppFormWrap');
+    const success  = document.getElementById('ppSuccess');
+
+    const WEBHOOK = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
+
+    function openModal() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Intercept all CTAs
+    document.querySelectorAll('.btn-glass, .nav-cta, .pricing-btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    // Close on overlay click
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Phone mask
+    const phoneInput = document.getElementById('ppTelefone');
+    phoneInput.addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+
+    // Submit
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errMsg.style.display = 'none';
+
+      const nome    = document.getElementById('ppNome').value.trim();
+      const tel     = document.getElementById('ppTelefone').value.trim();
+      const email   = document.getElementById('ppEmail').value.trim();
+      const empresa = document.getElementById('ppEmpresa').value.trim();
+
+      if (!nome || !tel || !email || !empresa) {
+        errMsg.style.display = 'block';
+        return;
+      }
+
+      const payload = {
+        nome,
+        telefone: tel,
+        email,
+        empresa,
+        segmento:   document.getElementById('ppSegmento').value,
+        tipo_venda: document.getElementById('ppTipo').value,
+        ja_licita:  document.getElementById('ppLicitacao').value,
+        quer_teste: document.getElementById('ppTeste').value,
+        pagina_url: window.location.href,
+        timestamp:  new Date().toISOString()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try {
+        await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        formWrap.style.display = 'none';
+        success.classList.add('visible');
+        setTimeout(closeModal, 4000);
+      } catch (err) {
+        errMsg.textContent = 'Erro ao enviar. Tente novamente.';
+        errMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Enviar e garantir meu acesso';
+      }
+    });
+  })();
+
 </script>
+
+<!-- =============================================
+     MODAL FORMULÁRIO CTA
+============================================= -->
+<div class="pp-modal-overlay" id="ppModal" role="dialog" aria-modal="true" aria-labelledby="ppModalTitle">
+  <div class="pp-modal">
+    <button class="pp-modal-close" id="ppModalClose" aria-label="Fechar">&times;</button>
+
+    <!-- Formulário -->
+    <div id="ppFormWrap">
+      <div class="pp-modal-header">
+        <p class="pp-modal-tag">[ Período de teste ]</p>
+        <h3 id="ppModalTitle">Fale com a gente e garanta seu acesso</h3>
+        <p>Preencha os dados abaixo e nossa equipe entrará em contato em breve.</p>
+      </div>
+
+      <form id="ppLeadForm" novalidate>
+        <div class="pp-form-grid">
+          <div class="pp-form-group full">
+            <label for="ppNome">Nome completo *</label>
+            <input type="text" id="ppNome" name="nome" required placeholder="Seu nome completo" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppTelefone">Telefone com DDD *</label>
+            <input type="tel" id="ppTelefone" name="telefone" required placeholder="(11) 99999-9999" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppEmail">E-mail *</label>
+            <input type="email" id="ppEmail" name="email" required placeholder="seu@email.com.br" />
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppEmpresa">Nome da empresa *</label>
+            <input type="text" id="ppEmpresa" name="empresa" required placeholder="Razão social ou nome fantasia" />
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppSegmento">Segmento</label>
+            <select id="ppSegmento" name="segmento">
+              <option value="" disabled selected>Selecione seu segmento</option>
+              <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+              <option value="Saúde e Farmácia">Saúde e Farmácia</option>
+              <option value="Construção Civil e Engenharia">Construção Civil e Engenharia</option>
+              <option value="Material de Escritório e Papelaria">Material de Escritório e Papelaria</option>
+              <option value="Alimentos e Bebidas">Alimentos e Bebidas</option>
+              <option value="Limpeza e Higiene">Limpeza e Higiene</option>
+              <option value="Segurança e Vigilância">Segurança e Vigilância</option>
+              <option value="Transporte e Logística">Transporte e Logística</option>
+              <option value="Treinamento e Capacitação">Treinamento e Capacitação</option>
+              <option value="Consultoria e Assessoria">Consultoria e Assessoria</option>
+              <option value="Equipamentos e Maquinário">Equipamentos e Maquinário</option>
+              <option value="Vestuário e EPIs">Vestuário e EPIs</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="pp-form-group">
+            <label for="ppTipo">Vende produtos ou serviços?</label>
+            <select id="ppTipo" name="tipo_venda">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Produtos">Produtos</option>
+              <option value="Serviços">Serviços</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+          </div>
+          <div class="pp-form-group">
+            <label for="ppLicitacao">Já participa de licitação?</label>
+            <select id="ppLicitacao" name="ja_licita">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppTeste">Gostaria de receber um período de teste?</label>
+            <select id="ppTeste" name="quer_teste">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Sim">Sim, quero testar</option>
+              <option value="Não">Não por agora</option>
+            </select>
+          </div>
+        </div>
+        <p class="pp-form-error" id="ppFormError">Por favor, preencha os campos obrigatórios.</p>
+        <button type="submit" class="pp-form-submit" id="ppSubmitBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Enviar e garantir meu acesso
+        </button>
+      </form>
+    </div>
+
+    <!-- Sucesso -->
+    <div class="pp-modal-success" id="ppSuccess">
+      <div class="pp-modal-success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>Recebemos seu contato!</h3>
+      <p>Nossa equipe entrará em contato em breve para iniciar seu período de teste.</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
