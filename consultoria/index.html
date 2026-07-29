@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Especialistas conduzem sua operação de licitação de ponta a ponta, dentro do PricePilot. Você mantém o controle das decisões e da margem. Nós cuidamos da execução, com menos risco.">
+  <title>Consultoria PricePilot | Venda para o Governo sem montar uma equipe de licitação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* =============================================
+       CSS VARIABLES & RESETs
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:        #1D4CD1;
+      --blue-light:  #4D8DF7;
+      --blue-pale:   #6B9EFF;
+      --dark:        #0D1A34;
+      --dark-bg:     #060118;
+      --mid-bg:      #0d0870;
+      --purple:      rgba(133,77,255,1);
+      --purple-soft: rgba(133,77,255,0.5);
+      --white:       #ffffff;
+      --gray-text:   rgba(255,255,255,0.65);
+      --gray-muted:  rgba(255,255,255,0.4);
+      --mono:        'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--dark-bg);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* =============================================
+       ANIMATED GRADIENT BG
+    ============================================= */
+    @keyframes gradientDrift {
+      0%   { background-position: 0% 0%; }
+      33%  { background-position: 100% 50%; }
+      66%  { background-position: 50% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+    .pp-bg {
+      background: linear-gradient(170deg, #060118 0%, #0d0870 30%, #160da8 62%, #1a10b5 80%, #0d0870 100%);
+      background-size: 250% 250%;
+      animation: gradientDrift 14s ease infinite;
+    }
+    .pp-bg-white { background: #ffffff; }
+    .pp-bg-gray  { background: #f9fafb; }
+
+    /* =============================================
+       GLASS MORPHISM UTILITIES
+    ============================================= */
+    .glass-dark {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .glass-white {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(29,76,209,0.14);
+      box-shadow: 0 4px 24px rgba(29,76,209,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-left  { opacity: 0; transform: translateX(-48px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-right { opacity: 0; transform: translateX(48px);  transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-left.revealed, .reveal-right.revealed { opacity: 1; transform: translateX(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+
+    /* =============================================
+       LAYOUT UTILITIES
+    ============================================= */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container-sm { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; position: relative; overflow: hidden; }
+
+    .tag-mono {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-muted);
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 12px 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background: rgba(13,26,52,0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px 24px;
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::before { opacity: 1; }
+    .nav-cta {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      padding: 10px 24px;
+      background: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      transition: background 0.2s, transform 0.15s;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+    }
+    .nav-cta:hover { background: #1535a0; transform: translateY(-1px); }
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      margin-left: auto;
+      padding: 4px;
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-wrap { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { gap: 16px; }
+      .nav-mobile-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(13,26,52,0.98);
+        border-radius: 0 0 12px 12px;
+        padding: 16px;
+        gap: 4px;
+      }
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 64px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    #hero .blob-top {
+      position: absolute;
+      top: -5%; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 700px;
+      background: radial-gradient(65% 55% at 50% 35%, rgba(100,60,255,0.45) 0%, rgba(40,20,200,0.2) 45%, transparent 75%);
+      filter: blur(24px);
+      pointer-events: none;
+    }
+    #hero .blob-left {
+      position: absolute; top: 25%; left: 0;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(80,20,200,0.2) 0%, transparent 70%);
+      filter: blur(40px); pointer-events: none;
+    }
+    #hero .blob-right {
+      position: absolute; top: 25%; right: 0;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(80,20,200,0.2) 0%, transparent 70%);
+      filter: blur(40px); pointer-events: none;
+    }
+    #hero .hero-content {
+      z-index: 1;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -1.6px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      margin-top: 0;
+      text-align: center;
+    }
+    #hero p.hero-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      text-align: center;
+    }
+    #hero p.hero-micro {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 10px;
+      padding: 16px 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+      margin-bottom: 24px;
+      font-family: inherit;
+    }
+    .btn-glass:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    /* =============================================
+       CONTROLE SECTION (white bg)
+    ============================================= */
+    .controle-section { color: var(--dark); }
+    .controle-section h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 24px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .controle-desc {
+      font-size: 16px;
+      color: #475569;
+      max-width: 720px;
+      margin: 0 auto 56px;
+      text-align: center;
+      line-height: 1.7;
+    }
+    .controle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .controle-grid { grid-template-columns: 1fr; } }
+    .controle-card {
+      background: #fff;
+      border: 1px solid rgba(29,76,209,0.12);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .controle-card:hover {
+      box-shadow: 0 8px 32px rgba(29,76,209,0.1);
+      transform: translateY(-4px);
+    }
+    .controle-card-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(29,76,209,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: var(--blue);
+    }
+    .controle-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       ERROS SECTION (gradient bg)
+    ============================================= */
+    .erros-section h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 48px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .erros-list {
+      max-width: 640px;
+      margin: 0 auto 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .erro-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,200,100,0.12);
+      border-left: 3px solid rgba(255,180,60,0.6);
+      border-radius: 12px;
+      padding: 20px 24px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .erro-item:hover {
+      background: rgba(255,255,255,0.08);
+      border-left-color: rgba(255,180,60,0.9);
+    }
+    .erro-marker {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(255,180,60,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,200,100,0.9);
+    }
+    .erro-item p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    .erros-closing {
+      font-size: 17px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       CONSULTORIA STEPS (white bg)
+    ============================================= */
+    .consultoria-section { color: var(--dark); }
+    .consultoria-section h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 56px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .step-card {
+      background: #fff;
+      border: 1px solid rgba(29,76,209,0.1);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .step-card:hover {
+      box-shadow: 0 12px 40px rgba(29,76,209,0.1);
+      transform: translateY(-4px);
+    }
+    .step-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .step-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      font-weight: 700;
+    }
+    .step-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(29,76,209,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+    }
+    .step-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .step-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #64748b;
+    }
+
+    /* =============================================
+       PARA QUEM SECTION (gradient bg)
+    ============================================= */
+    .para-quem-section h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 56px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .para-quem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .para-quem-grid { grid-template-columns: 1fr; } }
+    .para-quem-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .para-quem-card:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+    }
+    .para-quem-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(77,141,247,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--blue-light);
+    }
+    .para-quem-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* =============================================
+       POR QUE NOS SECTION (white bg)
+    ============================================= */
+    .porque-section { color: var(--dark); }
+    .porque-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .porque-layout { grid-template-columns: 1fr; gap: 32px; }
+      .porque-badges { order: 1; }
+    }
+    .porque-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .porque-badge {
+      background: rgba(29,76,209,0.06);
+      border: 1px solid rgba(29,76,209,0.12);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+    }
+    .porque-badge-number {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+    .porque-badge-label {
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .porque-text h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 24px;
+      line-height: 1.15;
+    }
+    .porque-text .tag-mono-blue {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .porque-text p.desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    /* =============================================
+       CTA FINAL SECTION (gradient bg)
+    ============================================= */
+    .cta-final-section h2 {
+      font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 24px;
+      text-align: center;
+      line-height: 1.15;
+    }
+    .cta-final-desc {
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .cta-final-micro {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-brand img { height: 36px; }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-legal {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* =============================================
+       MODAL
+    ============================================= */
+    .pp-modal-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(4,6,30,0.82);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .pp-modal-overlay.active {
+      opacity: 1; pointer-events: all;
+    }
+    .pp-modal {
+      background: linear-gradient(145deg, rgba(12,16,60,0.98), rgba(8,12,48,0.98));
+      border: 1px solid rgba(138,165,255,0.18);
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      width: 100%; max-width: 540px;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(29,76,209,0.15);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(.34,1.56,.64,1);
+    }
+    .pp-modal-overlay.active .pp-modal {
+      transform: translateY(0) scale(1);
+    }
+    .pp-modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.45); font-size: 22px; line-height: 1;
+      padding: 4px; transition: color 0.2s;
+    }
+    .pp-modal-close:hover { color: #fff; }
+    .pp-modal-header { margin-bottom: 28px; }
+    .pp-modal-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--blue-pale);
+      margin-bottom: 10px;
+    }
+    .pp-modal-header h3 {
+      font-size: 1.35rem; font-weight: 800; color: #fff;
+      line-height: 1.25; margin: 0 0 6px;
+    }
+    .pp-modal-header p {
+      font-size: 13px; color: rgba(255,255,255,0.5); margin: 0;
+    }
+    .pp-form-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .pp-form-group {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .pp-form-group.full { grid-column: 1 / -1; }
+    .pp-form-group label {
+      font-size: 11.5px; font-weight: 600;
+      color: rgba(255,255,255,0.6); letter-spacing: 0.3px;
+    }
+    .pp-form-group input,
+    .pp-form-group select {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: #fff; font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.2s, background 0.2s;
+      width: 100%; box-sizing: border-box;
+      -webkit-appearance: none; appearance: none;
+    }
+    .pp-form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .pp-form-group input::placeholder { color: rgba(255,255,255,0.28); }
+    .pp-form-group input:focus,
+    .pp-form-group select:focus {
+      border-color: rgba(29,76,209,0.7);
+      background: rgba(29,76,209,0.1);
+    }
+    .pp-form-group select option { background: #0c1040; color: #fff; }
+    .pp-form-submit {
+      width: 100%; margin-top: 20px;
+      padding: 15px; border: none; border-radius: 12px;
+      background: var(--blue); color: #fff;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      letter-spacing: 0.2px; font-family: inherit;
+      transition: background 0.2s, transform 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .pp-form-submit:hover { background: #1535a0; transform: translateY(-1px); }
+    .pp-form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .pp-modal-success {
+      text-align: center; padding: 20px 0;
+      display: none; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .pp-modal-success.visible { display: flex; }
+    .pp-modal-success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(34,197,94,0.18); border: 1px solid rgba(34,197,94,0.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pp-modal-success h3 { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 0; }
+    .pp-modal-success p { font-size: 14px; color: rgba(255,255,255,0.55); margin: 0; }
+    .pp-form-error {
+      font-size: 12px; color: #f87171; margin-top: 12px; text-align: center; display: none;
+    }
+    @media (max-width: 540px) {
+      .pp-modal { padding: 28px 20px 24px; }
+      .pp-form-grid { grid-template-columns: 1fr; }
+      .pp-form-group.full { grid-column: 1; }
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+    }
+
+    /* =============================================
+       PREFERS REDUCED MOTION
+    ============================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .pp-bg { animation: none; }
+    }
+  </style>
+
+  <!--  Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1478354830613271');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
+  /></noscript>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-B8M2Q0JT51"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-B8M2Q0JT51');
+  </script>
+</head>
+
+<body class="pp-bg">
+
+<!-- =============================================
+     NAVBAR
+============================================= -->
+<nav id="nav">
+  <div class="nav-inner" id="navInner">
+    <a href="/consultoria/" class="nav-logo">
+      <img src="../assets/logo.png" alt="PricePilot">
+    </a>
+    <div class="nav-links">
+      <a href="#controle">Controle</a>
+      <a href="#consultoria">Consultoria</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#por-que">Por que nós</a>
+    </div>
+    <div class="nav-cta-wrap">
+      <button class="nav-cta">Falar com especialista</button>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section id="hero" class="section pp-bg">
+  <div class="blob-top"></div>
+  <div class="blob-left"></div>
+  <div class="blob-right"></div>
+
+  <div class="hero-content">
+    <p class="tag-mono reveal">[ CONSULTORIA PRICEPILOT ]</p>
+
+    <h1 class="reveal reveal-d1">Venda para o Governo sem precisar montar uma equipe de licitação.</h1>
+
+    <p class="hero-subtitle reveal reveal-d2">Sua empresa vende para o Governo. Nós cuidamos da inteligência da licitação. Especialistas conduzem sua operação dentro do PricePilot, do mapeamento da oportunidade à proposta pronta, sempre dentro da margem que você aprovou antes.</p>
+
+    <button class="btn-glass reveal reveal-d3">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Falar com um especialista
+    </button>
+
+    <p class="hero-micro reveal reveal-d4">Atendimento consultivo. O escopo depende da sua operação, e é isso que desenhamos juntos na primeira conversa.</p>
+  </div>
+</section>
+
+<!-- =============================================
+     BLOCO 2: VOCE CONTINUA NO COMANDO
+============================================= -->
+<section id="controle" class="section pp-bg-white controle-section">
+  <div class="container">
+    <p class="tag-mono reveal" style="color: var(--blue); text-align: center; margin-bottom: 16px;">[ VOCÊ CONTINUA NO COMANDO ]</p>
+
+    <h2 class="reveal">A execução deixa de ser problema seu.<br>O controle continua sendo.</h2>
+
+    <p class="controle-desc reveal reveal-d1">A Consultoria PricePilot não é terceirização às cegas. Você continua dono da sua licença, com acesso integral à plataforma, acompanhando tudo em tempo real e podendo operar junto quando quiser. Nossa equipe atua como uma extensão da sua, sem tirar sua autonomia sobre o processo.</p>
+
+    <div class="controle-grid">
+      <div class="controle-card reveal reveal-d1">
+        <div class="controle-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <p>Você aprova a margem antes. Nada é submetido sem passar por você.</p>
+      </div>
+
+      <div class="controle-card reveal reveal-d2">
+        <div class="controle-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <p>Você vê cada proposta sendo construída dentro do PricePilot.</p>
+      </div>
+
+      <div class="controle-card reveal reveal-d3">
+        <div class="controle-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p>Você mantém a licença, o histórico e o controle, com ou sem consultoria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     BLOCO 3: QUANTO CUSTA UM ERRO
+============================================= -->
+<section id="erros" class="section pp-bg erros-section">
+  <div class="container">
+    <p class="tag-mono reveal" style="text-align: center; margin-bottom: 16px;">[ QUANTO CUSTA UM ERRO ]</p>
+
+    <h2 class="reveal">Uma proposta errada pode custar caro.</h2>
+
+    <div class="erros-list">
+      <div class="erro-item reveal reveal-d1">
+        <div class="erro-marker">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p>Uma margem mal calculada.</p>
+      </div>
+
+      <div class="erro-item reveal reveal-d2">
+        <div class="erro-marker">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p>Um imposto esquecido.</p>
+      </div>
+
+      <div class="erro-item reveal reveal-d3">
+        <div class="erro-marker">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p>Um frete incorreto.</p>
+      </div>
+
+      <div class="erro-item reveal reveal-d4">
+        <div class="erro-marker">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <p>Uma documentação enviada fora do prazo.</p>
+      </div>
+    </div>
+
+    <p class="erros-closing reveal">Qualquer um desses erros pode transformar um contrato lucrativo em prejuízo. Nossa consultoria existe justamente para reduzir esses riscos.</p>
+  </div>
+</section>
+
+<!-- =============================================
+     BLOCO 4: O QUE A CONSULTORIA CONDUZ
+============================================= -->
+<section id="consultoria" class="section pp-bg-white consultoria-section">
+  <div class="container">
+    <p class="tag-mono reveal" style="color: var(--blue); text-align: center; margin-bottom: 16px;">[ O QUE A CONSULTORIA CONDUZ ]</p>
+
+    <h2 class="reveal">Da oportunidade à proposta submetida, sem lacuna.</h2>
+
+    <div class="steps-grid">
+      <div class="step-card reveal reveal-d1">
+        <div class="step-card-header">
+          <span class="step-num">[ 01 ]</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+        </div>
+        <h3>Mapeamento de oportunidades</h3>
+        <p>Encontramos os editais que fazem sentido para o seu negócio, no seu setor e na sua faixa de atuação.</p>
+      </div>
+
+      <div class="step-card reveal reveal-d2">
+        <div class="step-card-header">
+          <span class="step-num">[ 02 ]</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+        </div>
+        <h3>Análise técnica e documental</h3>
+        <p>Conferimos as exigências do edital e a sua documentação antes de você investir tempo numa participação que não daria certo.</p>
+      </div>
+
+      <div class="step-card reveal reveal-d3">
+        <div class="step-card-header">
+          <span class="step-num">[ 03 ]</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+        </div>
+        <h3>Estruturação da proposta</h3>
+        <p>Montamos a composição de custos completa (impostos, encargos, frete, margem) com a estrutura validada do PricePilot.</p>
+      </div>
+
+      <div class="step-card reveal reveal-d4">
+        <div class="step-card-header">
+          <span class="step-num">[ 04 ]</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+        </div>
+        <h3>Condução do processo</h3>
+        <p>Cuidamos do fluxo do início ao fim, com apoio durante o pregão eletrônico.</p>
+      </div>
+
+      <div class="step-card reveal reveal-d5">
+        <div class="step-card-header">
+          <span class="step-num">[ 05 ]</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+        </div>
+        <h3>Validação da participação e da margem</h3>
+        <p>Confirmamos, junto com você, que o preço é competitivo e viável. Sem surpresa de inexequibilidade depois que você ganhou.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     BLOCO 5: PARA QUEM E
+============================================= -->
+<section id="para-quem" class="section pp-bg para-quem-section">
+  <div class="container">
+    <p class="tag-mono reveal" style="text-align: center; margin-bottom: 16px;">[ PARA QUEM É ]</p>
+
+    <h2 class="reveal">Para quem é a Consultoria PricePilot</h2>
+
+    <div class="para-quem-grid">
+      <div class="para-quem-card reveal reveal-d1">
+        <div class="para-quem-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p>Sua empresa quer vender para o Governo, mas ainda não tem repertório interno de precificação pública e teme ganhar no prejuízo.</p>
+      </div>
+
+      <div class="para-quem-card reveal reveal-d2">
+        <div class="para-quem-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <p>Você já participa, mas não tem tempo de montar proposta para cada edital e sente que perde oportunidades por falta de mão.</p>
+      </div>
+
+      <div class="para-quem-card reveal reveal-d3">
+        <div class="para-quem-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <p>Você quer escalar a participação sem montar um time de licitação do zero.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     BLOCO 6: POR QUE COM A GENTE
+============================================= -->
+<section id="por-que" class="section pp-bg-white porque-section">
+  <div class="container">
+    <div class="porque-layout">
+      <div class="porque-badges">
+        <div class="porque-badge reveal reveal-d1">
+          <span class="porque-badge-number">12</span>
+          <span class="porque-badge-label">anos no mercado de licitação</span>
+        </div>
+        <div class="porque-badge reveal reveal-d2">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="porque-badge-label">Apoiados pela Sages</span>
+        </div>
+      </div>
+
+      <div class="porque-text">
+        <span class="tag-mono-blue reveal">[ POR QUE COM A GENTE ]</span>
+        <h2 class="reveal reveal-d1">Quem conduz é quem viveu o problema.</h2>
+        <p class="desc reveal reveal-d2">O PricePilot nasceu de 12 anos dentro do mercado de licitação, construído por quem cansou de montar proposta em planilha sem nenhuma ferramenta à altura. A mesma bagagem que originou a plataforma está por trás da consultoria. Você não contrata um operador genérico. Contrata especialistas que precificam licitação todos os dias, apoiados pela Sages, com histórico de entrega em projetos de grande porte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CTA FINAL
+============================================= -->
+<section id="cta" class="section pp-bg cta-final-section">
+  <div class="container" style="text-align: center;">
+    <h2 class="reveal">Comece sua operação com segurança.</h2>
+
+    <p class="cta-final-desc reveal reveal-d1">Nossa equipe entende o seu mercado, desenha a estratégia de participação e conduz toda a operação dentro do PricePilot. Você mantém o controle das decisões. Nós cuidamos da execução.</p>
+
+    <button class="btn-glass reveal reveal-d2">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Agende uma conversa
+    </button>
+
+    <p class="cta-final-micro reveal reveal-d3">Descubra como sua empresa pode vender mais para o Governo com menos risco. Atendimento consultivo, o valor depende da necessidade e da complexidade da operação.</p>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer class="pp-bg footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="../assets/logo.png" alt="PricePilot" height="36">
+      <p class="footer-tagline">Seu copiloto de decisão para licitações.</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">Página principal</a>
+      <a href="/parceiros/">Programa de Parceiros</a>
+    </div>
+    <p class="footer-legal">&copy; 2026 PricePilot. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+============================================= -->
+<script>
+  /* ---- Prefers Reduced Motion Check ---- */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- Scroll Reveal ---- */
+  if (!prefersReducedMotion) {
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => el.classList.add('revealed'));
+  }
+
+  /* ---- Hamburger ---- */
+  const hamburger = document.getElementById('hamburger');
+  const navInner = document.getElementById('navInner');
+  hamburger.addEventListener('click', () => navInner.classList.toggle('nav-mobile-open'));
+
+  /* ---- Sticky Nav ---- */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 60) {
+      nav.style.paddingTop = '8px';
+    } else {
+      nav.style.paddingTop = '12px';
+    }
+  });
+
+  /* ---- Modal CTA ---- */
+  document.addEventListener('DOMContentLoaded', function () {
+    const overlay  = document.getElementById('ppModal');
+    const closeBtn = document.getElementById('ppModalClose');
+    const form     = document.getElementById('ppLeadForm');
+    const submitBtn= document.getElementById('ppSubmitBtn');
+    const errMsg   = document.getElementById('ppFormError');
+    const formWrap = document.getElementById('ppFormWrap');
+    const success  = document.getElementById('ppSuccess');
+
+    const WEBHOOK = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
+
+    function getUtms() {
+      const p = new URLSearchParams(window.location.search);
+      const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid'];
+      const utms = {};
+      keys.forEach(k => { if (p.get(k)) utms[k] = p.get(k); });
+      return utms;
+    }
+
+    function openModal() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.btn-glass, .nav-cta').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+    closeBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    const phoneInput = document.getElementById('ppTelefone');
+    phoneInput.addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errMsg.style.display = 'none';
+
+      const nome    = document.getElementById('ppNome').value.trim();
+      const tel     = document.getElementById('ppTelefone').value.trim();
+      const email   = document.getElementById('ppEmail').value.trim();
+      const empresa = document.getElementById('ppEmpresa').value.trim();
+
+      if (!nome || !tel || !email || !empresa) {
+        errMsg.style.display = 'block';
+        return;
+      }
+
+      const utms = getUtms();
+
+      const payload = {
+        nome,
+        telefone: tel,
+        email,
+        empresa,
+        segmento:   document.getElementById('ppSegmento').value,
+        tipo_venda: document.getElementById('ppTipo').value,
+        ja_licita:  document.getElementById('ppLicitacao').value,
+        origem: 'consultoria',
+        pagina_url: window.location.href,
+        timestamp:  new Date().toISOString(),
+        ...utms
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try {
+        await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'Consultoria Form', ...utms });
+        }
+        if (typeof gtag === 'function') {
+          gtag('event', 'close_convert_lead', { event_category: 'lead', email, ...utms });
+        }
+
+        formWrap.style.display = 'none';
+        success.classList.add('visible');
+        setTimeout(closeModal, 4000);
+      } catch (err) {
+        errMsg.textContent = 'Erro ao enviar. Tente novamente.';
+        errMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Falar com um especialista';
+      }
+    });
+  });
+</script>
+
+<!-- =============================================
+     MODAL FORMULARIO CTA
+============================================= -->
+<div class="pp-modal-overlay" id="ppModal" role="dialog" aria-modal="true" aria-labelledby="ppModalTitle">
+  <div class="pp-modal">
+    <button class="pp-modal-close" id="ppModalClose" aria-label="Fechar">&times;</button>
+
+    <div id="ppFormWrap">
+      <div class="pp-modal-header">
+        <p class="pp-modal-tag">[ Consultoria PricePilot ]</p>
+        <h3 id="ppModalTitle">Falar com um especialista</h3>
+        <p>Atendimento consultivo. Nós entendemos sua operação e desenhamos a melhor estratégia juntos.</p>
+      </div>
+
+      <form id="ppLeadForm" novalidate>
+        <div class="pp-form-grid">
+          <div class="pp-form-group full">
+            <label for="ppNome">Nome completo *</label>
+            <input type="text" id="ppNome" name="nome" required placeholder="Seu nome completo" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppTelefone">Telefone com DDD *</label>
+            <input type="tel" id="ppTelefone" name="telefone" required placeholder="(11) 99999-9999" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppEmail">E-mail *</label>
+            <input type="email" id="ppEmail" name="email" required placeholder="seu@email.com.br" />
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppEmpresa">Nome da empresa *</label>
+            <input type="text" id="ppEmpresa" name="empresa" required placeholder="Razão social ou nome fantasia" />
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppSegmento">Segmento</label>
+            <select id="ppSegmento" name="segmento">
+              <option value="" disabled selected>Selecione seu segmento</option>
+              <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+              <option value="Saúde e Farmácia">Saúde e Farmácia</option>
+              <option value="Construção Civil e Engenharia">Construção Civil e Engenharia</option>
+              <option value="Material de Escritório e Papelaria">Material de Escritório e Papelaria</option>
+              <option value="Alimentos e Bebidas">Alimentos e Bebidas</option>
+              <option value="Limpeza e Higiene">Limpeza e Higiene</option>
+              <option value="Segurança e Vigilância">Segurança e Vigilância</option>
+              <option value="Transporte e Logística">Transporte e Logística</option>
+              <option value="Treinamento e Capacitação">Treinamento e Capacitação</option>
+              <option value="Consultoria e Assessoria">Consultoria e Assessoria</option>
+              <option value="Equipamentos e Maquinário">Equipamentos e Maquinário</option>
+              <option value="Vestuário e EPIs">Vestuário e EPIs</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="pp-form-group">
+            <label for="ppTipo">Vende produtos ou serviços?</label>
+            <select id="ppTipo" name="tipo_venda">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Produtos">Produtos</option>
+              <option value="Serviços">Serviços</option>
+              <option value="Ambos">Ambos</option>
+            </select>
+          </div>
+          <div class="pp-form-group">
+            <label for="ppLicitacao">Já participa de licitação?</label>
+            <select id="ppLicitacao" name="ja_licita">
+              <option value="" disabled selected>Selecione</option>
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+        </div>
+        <p class="pp-form-error" id="ppFormError">Por favor, preencha os campos obrigatórios.</p>
+        <button type="submit" class="pp-form-submit" id="ppSubmitBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Falar com um especialista
+        </button>
+      </form>
+    </div>
+
+    <div class="pp-modal-success" id="ppSuccess">
+      <div class="pp-modal-success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h3>Recebemos seu contato!</h3>
+      <p>Nossa equipe entrará em contato em breve para iniciar sua conversa consultiva.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
