@@ -202,78 +202,258 @@
     }
 
     /* =============================================
-       HERO SECTION
+       HERO SECTION (operação assistida)
     ============================================= */
     #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-top: 100px;
-      padding-bottom: 64px;
       position: relative;
       overflow: hidden;
-      text-align: center;
+      padding-top: 140px;
+      padding-bottom: 80px;
     }
-    #hero .blob-top {
+    .hero-network-bg {
       position: absolute;
-      top: -5%; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 700px;
-      background: radial-gradient(65% 55% at 50% 35%, rgba(100,60,255,0.45) 0%, rgba(40,20,200,0.2) 45%, transparent 75%);
-      filter: blur(24px);
+      top: 0; right: 0;
+      width: 60%; height: 100%;
       pointer-events: none;
+      opacity: 0.9;
     }
-    #hero .blob-left {
-      position: absolute; top: 25%; left: 0;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(80,20,200,0.2) 0%, transparent 70%);
-      filter: blur(40px); pointer-events: none;
-    }
-    #hero .blob-right {
-      position: absolute; top: 25%; right: 0;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(80,20,200,0.2) 0%, transparent 70%);
-      filter: blur(40px); pointer-events: none;
-    }
-    #hero .hero-content {
-      z-index: 1;
+    .hero-network-bg svg { width: 100%; height: 100%; }
+    #hero .hero-grid {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 56px;
       align-items: center;
     }
+    @media (max-width: 1000px) {
+      #hero .hero-grid { grid-template-columns: 1fr; }
+    }
+    #hero .hero-text { text-align: left; }
     #hero h1 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
       font-weight: 900;
-      letter-spacing: -1.6px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      margin-top: 0;
-      text-align: center;
+      letter-spacing: -1.4px;
+      line-height: 1.14;
+      margin-bottom: 20px;
+      color: #fff;
+      text-align: left;
+    }
+    #hero h1 .hero-grad {
+      background: linear-gradient(90deg, #4D8DF7, #9cc0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     #hero p.hero-subtitle {
-      font-size: 18px;
-      color: rgba(255,255,255,0.75);
-      max-width: 640px;
-      margin: 0 auto 40px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      max-width: 540px;
+      margin: 0 0 32px;
       line-height: 1.7;
-      text-align: center;
+      text-align: left;
     }
     #hero p.hero-micro {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 13px;
-      color: rgba(255,255,255,0.45);
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.6;
-      text-align: center;
+      color: rgba(255,255,255,0.5);
+      margin: 24px 0 0;
+      line-height: 1.5;
+      text-align: left;
+    }
+    #hero p.hero-micro svg { flex-shrink: 0; color: var(--blue-light); }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      border: none;
+      border-radius: 10px;
+      padding: 16px 32px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px rgba(29,76,209,0.35);
+    }
+    .btn-primary:hover {
+      background: #1535a0;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(29,76,209,0.45);
+    }
+
+    /* --- operação assistida card --- */
+    .hero-card {
+      position: relative;
+      background: rgba(8,12,45,0.7);
+      border: 1px solid rgba(77,141,247,0.18);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+    .hero-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .hero-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .hero-live-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px 2px rgba(74,222,128,0.6);
+      animation: heroDotPulse 2s ease infinite;
+    }
+    @keyframes heroDotPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .hero-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 560px) {
+      .hero-card-body { grid-template-columns: 1fr; }
+    }
+    .hero-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+    .hero-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 16px; bottom: 16px;
+      width: 2px;
+      background: rgba(77,141,247,0.25);
+      z-index: 0;
+    }
+    .hero-tl-item {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-tl-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+      border: 2px solid rgba(77,141,247,0.35);
+      flex-shrink: 0;
+    }
+    .hero-tl-item.done .hero-tl-dot {
+      background: var(--blue);
+      border-color: var(--blue-light);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(29,76,209,0.18);
+    }
+    .hero-tl-item.active .hero-tl-dot {
+      border-color: var(--blue-light);
+      box-shadow: 0 0 0 4px rgba(77,141,247,0.18);
+      animation: heroDotPulse 2s ease infinite;
+    }
+    .hero-tl-item span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .hero-tl-item.active span { color: rgba(255,255,255,0.55); }
+
+    .hero-doc {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .hero-doc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .hero-doc-header span:first-child { font-size: 13px; font-weight: 700; color: #fff; }
+    .hero-doc-tag {
+      background: var(--blue);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+    .hero-doc-lines { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .hero-doc-lines span { display: block; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); }
+    .hero-doc-highlight {
+      background: rgba(77,141,247,0.08);
+      border: 1px solid rgba(77,141,247,0.2);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero-doc-highlight .bar { display: block; height: 6px; border-radius: 3px; background: rgba(77,141,247,0.4); width: 40%; }
+    .hero-doc-highlight .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .hero-doc-highlight .row span { font-size: 10px; color: rgba(255,255,255,0.5); }
+    .hero-doc-highlight .row strong { font-size: 13px; color: var(--blue-light); font-weight: 800; white-space: nowrap; }
+    .hero-doc-sig { color: rgba(255,255,255,0.25); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 560px) { .hero-stats { grid-template-columns: 1fr; } }
+    .hero-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hero-stat svg { color: var(--blue-light); }
+    .hero-stat span { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.3; }
+    .hero-stat strong { font-size: 18px; color: #fff; font-weight: 800; }
+
+    .hero-approved {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 12px;
+      padding: 14px;
+      color: #4ade80;
+      font-weight: 700;
+      font-size: 14px;
     }
 
     .btn-glass {
@@ -302,113 +482,181 @@
     }
 
     /* =============================================
-       CONTROLE SECTION (white bg)
+       SECTION HEADINGS (shared, from parceiros)
     ============================================= */
-    .controle-section { color: var(--dark); }
-    .controle-section h2 {
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
+    .section-dark-heading {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
       font-weight: 900;
-      color: var(--dark);
-      margin-bottom: 24px;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      color: #fff;
       text-align: center;
-      line-height: 1.15;
     }
-    .controle-desc {
+    .section-white-heading {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      text-align: center;
+    }
+    .section-lead {
       font-size: 16px;
-      color: #475569;
-      max-width: 720px;
-      margin: 0 auto 56px;
-      text-align: center;
       line-height: 1.7;
-    }
-    .controle-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    @media (max-width: 768px) { .controle-grid { grid-template-columns: 1fr; } }
-    .controle-card {
-      background: #fff;
-      border: 1px solid rgba(29,76,209,0.12);
-      border-radius: 16px;
-      padding: 32px 24px;
+      max-width: 700px;
+      margin: 0 auto 40px;
       text-align: center;
-      transition: box-shadow 0.3s, transform 0.3s;
     }
-    .controle-card:hover {
-      box-shadow: 0 8px 32px rgba(29,76,209,0.1);
-      transform: translateY(-4px);
-    }
-    .controle-card-icon {
-      width: 56px; height: 56px;
-      border-radius: 14px;
-      background: rgba(29,76,209,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-      color: var(--blue);
-    }
-    .controle-card p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--dark);
-      font-weight: 500;
+    .section-lead-dark { color: rgba(255,255,255,0.6); }
+    .section-lead-white { color: #6b7280; }
+    .section-muted {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
     /* =============================================
-       ERROS SECTION (gradient bg)
+       CONTROLE SECTION (white bg, glow-border grid)
     ============================================= */
-    .erros-section h2 {
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 48px;
-      text-align: center;
-      line-height: 1.15;
+    .controle-section { color: var(--dark); }
+    .pq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(29,76,209,0.10);
+      border: 1px solid rgba(29,76,209,0.10);
+      border-radius: 20px;
+      overflow: hidden;
     }
-    .erros-list {
-      max-width: 640px;
-      margin: 0 auto 48px;
+    @media (max-width: 768px) { .pq-grid { grid-template-columns: 1fr; } }
+    .pq-cell {
+      position: relative;
+      background: #fff;
+      padding: 40px 36px;
+      text-align: left;
+      z-index: 1;
+    }
+    .pq-cell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(from 180deg at 50% 50%, #1D4CD1, #4D8DF7, #6B9EFF, #4D8DF7, #1D4CD1);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .pq-cell:hover::before { opacity: 1; }
+    .pq-cell:nth-child(1) { border-radius: 20px 0 0 20px; }
+    .pq-cell:nth-child(3) { border-radius: 0 20px 20px 0; }
+    @media (max-width: 768px) {
+      .pq-cell:nth-child(1) { border-radius: 20px 20px 0 0; }
+      .pq-cell:nth-child(3) { border-radius: 0 0 20px 20px; }
+    }
+    .pq-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(29,76,209,0.06);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      transition: background 0.3s ease;
+    }
+    .pq-cell:hover .pq-icon { background: rgba(29,76,209,0.1); }
+    .pq-icon svg { color: var(--blue); }
+    .pq-cell p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--dark);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =============================================
+       ERROS SECTION (dark bg, feature grid w/ hover)
+    ============================================= */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto 40px;
+    }
+    @media (max-width: 900px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+    .feat-cell {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      padding: 32px 28px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
     }
-    .erro-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,200,100,0.12);
-      border-left: 3px solid rgba(255,180,60,0.6);
-      border-radius: 12px;
-      padding: 20px 24px;
-      transition: border-color 0.3s, background 0.3s;
+    .feat-cell:nth-child(4n) { border-right: none; }
+    .feat-cell:first-child { border-left: 1px solid rgba(255,255,255,0.1); }
+    @media (max-width: 900px) {
+      .feat-cell { border-left: none !important; border-right: none !important; }
+      .feat-grid .feat-cell:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.1) !important; }
     }
-    .erro-item:hover {
-      background: rgba(255,255,255,0.08);
-      border-left-color: rgba(255,180,60,0.9);
+    @media (max-width: 480px) {
+      .feat-grid .feat-cell:nth-child(odd) { border-right: none !important; }
+      .feat-grid .feat-cell:last-child { border-bottom: none !important; }
     }
-    .erro-marker {
-      flex-shrink: 0;
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      background: rgba(255,180,60,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,200,100,0.9);
+    .feat-cell-glow {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+      transition: opacity 0.25s ease;
     }
-    .erro-item p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.5;
-      font-weight: 500;
+    .feat-cell:hover .feat-cell-glow { opacity: 1; }
+    .feat-cell-icon {
+      position: relative;
+      z-index: 1;
+      width: 26px; height: 26px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 18px;
+      transition: color 0.2s ease;
     }
+    .feat-cell:hover .feat-cell-icon { color: var(--blue-light); }
+    .feat-cell-title {
+      position: relative;
+      z-index: 1;
+      padding-left: 18px;
+    }
+    .feat-cell-bar {
+      position: absolute;
+      left: 0; top: 2px;
+      height: 22px; width: 3px;
+      border-radius: 0 4px 4px 0;
+      background: rgba(255,255,255,0.18);
+      transition: height 0.2s ease, background 0.2s ease;
+    }
+    .feat-cell:hover .feat-cell-bar { height: 28px; background: var(--blue-light); }
+    .feat-cell-title span {
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: #fff;
+      transition: transform 0.2s ease;
+    }
+    .feat-cell:hover .feat-cell-title span { transform: translateX(8px); }
     .erros-closing {
-      font-size: 17px;
-      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
       text-align: center;
       max-width: 560px;
       margin: 0 auto;
@@ -416,114 +664,132 @@
     }
 
     /* =============================================
-       CONSULTORIA STEPS (white bg)
+       CONSULTORIA STEPS (plat-journey, from parceiros)
     ============================================= */
-    .consultoria-section { color: var(--dark); }
-    .consultoria-section h2 {
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
-      font-weight: 900;
-      color: var(--dark);
-      margin-bottom: 56px;
-      text-align: center;
-      line-height: 1.15;
+    .consultoria-section { color: var(--dark); position: relative; overflow: hidden; }
+    .consultoria-section .plat-circuit-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        linear-gradient(rgba(29,76,209,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29,76,209,0.06) 1px, transparent 1px);
+      background-size: 80px 80px;
     }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+    .consultoria-section .plat-circuit-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(29,76,209,0.08) 1px, transparent 1px);
+      background-size: 80px 80px;
+      background-position: 40px 40px;
     }
-    .step-card {
-      background: #fff;
-      border: 1px solid rgba(29,76,209,0.1);
-      border-radius: 16px;
-      padding: 32px 28px;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .step-card:hover {
-      box-shadow: 0 12px 40px rgba(29,76,209,0.1);
-      transform: translateY(-4px);
-    }
-    .step-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .step-num {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: var(--blue);
-      font-weight: 700;
-    }
-    .step-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      background: rgba(29,76,209,0.08);
+    .plat-journey-wrap { position: relative; }
+    .plat-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--blue);
+      gap: 0;
+      position: relative;
     }
-    .step-card h3 {
-      font-size: 18px;
+    .plat-row-bottom { margin-top: 56px; }
+    .plat-step {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding: 32px 16px 24px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(29,76,209,0.12);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(29,76,209,0.06);
+      width: 180px;
+      min-height: 160px;
+      flex-shrink: 0;
+    }
+    .plat-step-badge {
+      position: absolute;
+      top: -14px;
+      left: -8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(29,76,209,0.35);
+      z-index: 2;
+    }
+    .plat-step-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(29,76,209,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .plat-step-icon svg { color: var(--blue); }
+    .plat-step h4 {
+      font-size: 13px;
       font-weight: 700;
       color: var(--dark);
-      margin-bottom: 8px;
-      line-height: 1.3;
+      line-height: 1.35;
+      margin: 0;
     }
-    .step-card p {
-      font-size: 14px;
-      line-height: 1.65;
-      color: #64748b;
+    .plat-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      flex-shrink: 0;
+      color: rgba(29,76,209,0.3);
+    }
+    .plat-arrow svg { display: block; }
+    @media (max-width: 900px) {
+      .plat-step { width: 155px; padding: 28px 12px 20px; min-height: 145px; }
+      .plat-step h4 { font-size: 12px; }
+      .plat-step-icon { width: 44px; height: 44px; }
+      .plat-arrow { width: 32px; }
+    }
+    @media (max-width: 768px) {
+      .plat-row { flex-direction: column; gap: 40px; }
+      .plat-row-bottom { margin-top: 40px; }
+      .plat-step { width: 100%; max-width: 320px; flex-direction: row; gap: 16px; text-align: left; padding: 20px 20px 20px 44px; min-height: auto; }
+      .plat-step-badge { top: 50%; left: -14px; transform: translateY(-50%); }
+      .plat-step-icon { width: 44px; height: 44px; min-width: 44px; }
+      .plat-arrow { transform: rotate(90deg); width: auto; height: 32px; }
     }
 
     /* =============================================
-       PARA QUEM SECTION (gradient bg)
+       PARA QUEM SECTION (dark bg, glow-border grid)
     ============================================= */
-    .para-quem-section h2 {
-      font-size: clamp(1.9rem, 4vw, 2.6rem);
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 56px;
-      text-align: center;
-      line-height: 1.15;
+    .pq-grid--dark {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.1);
     }
-    .para-quem-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    @media (max-width: 768px) { .para-quem-grid { grid-template-columns: 1fr; } }
-    .para-quem-card {
-      background: rgba(255,255,255,0.07);
+    .pq-grid--dark .pq-cell {
+      background: rgba(10,14,50,0.001);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.13);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      transition: background 0.3s, transform 0.3s;
     }
-    .para-quem-card:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-4px);
+    .pq-grid--dark .pq-cell::before {
+      background: conic-gradient(from 180deg at 50% 50%, #4D8DF7, #6B9EFF, #8aa5ff, #6B9EFF, #4D8DF7);
     }
-    .para-quem-icon {
-      width: 56px; height: 56px;
-      border-radius: 14px;
-      background: rgba(77,141,247,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: var(--blue-light);
+    .pq-grid--dark .pq-icon {
+      background: rgba(255,255,255,0.1);
     }
-    .para-quem-card p {
-      font-size: 15px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.85);
-    }
+    .pq-grid--dark .pq-cell:hover .pq-icon { background: rgba(255,255,255,0.16); }
+    .pq-grid--dark .pq-icon svg { color: var(--blue-light); }
+    .pq-grid--dark .pq-cell p { color: rgba(255,255,255,0.8); }
 
     /* =============================================
        POR QUE NOS SECTION (white bg)
@@ -542,11 +808,12 @@
     .porque-badges {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
     .porque-badge {
-      background: rgba(29,76,209,0.06);
-      border: 1px solid rgba(29,76,209,0.12);
+      background: #fff;
+      border: 1px solid rgba(29,76,209,0.10);
+      box-shadow: 0 4px 24px rgba(29,76,209,0.06);
       border-radius: 16px;
       padding: 28px 24px;
       display: flex;
@@ -554,6 +821,11 @@
       align-items: center;
       text-align: center;
       gap: 8px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .porque-badge:hover {
+      box-shadow: 0 12px 40px rgba(29,76,209,0.12);
+      transform: translateY(-4px);
     }
     .porque-badge-number {
       font-size: 48px;
@@ -574,15 +846,6 @@
       margin-bottom: 24px;
       line-height: 1.15;
     }
-    .porque-text .tag-mono-blue {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 16px;
-      display: block;
-    }
     .porque-text p.desc {
       font-size: 16px;
       line-height: 1.8;
@@ -590,20 +853,12 @@
     }
 
     /* =============================================
-       CTA FINAL SECTION (gradient bg)
+       CTA FINAL SECTION (dark bg)
     ============================================= */
-    .cta-final-section h2 {
-      font-size: clamp(1.9rem, 4.5vw, 2.8rem);
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 24px;
-      text-align: center;
-      line-height: 1.15;
-    }
     .cta-final-desc {
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.7;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.6);
       max-width: 700px;
       margin: 0 auto 40px;
       text-align: center;
@@ -618,44 +873,36 @@
     }
 
     /* =============================================
-       FOOTER
+       FOOTER (from parceiros)
     ============================================= */
-    .footer {
-      padding: 48px 0 32px;
+    footer {
+      position: relative; padding: 48px 0;
+      color: #fff;
+    }
+    footer::after {
+      content: ''; position: absolute; inset-x: 0; top: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     }
     .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
     }
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 32px; margin-bottom: 32px;
     }
-    .footer-brand img { height: 36px; }
-    .footer-tagline {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-    }
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-    .footer-links a {
-      font-size: 14px;
-      color: rgba(255,255,255,0.6);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: #fff; }
-    .footer-legal {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    footer img.logo { height: 40px; width: auto; margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .footer-col h4 { font-weight: 700; font-size: 14px; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px; text-align: center;
+      font-size: 13px; color: rgba(255,255,255,0.4);
     }
 
     /* =============================================
@@ -829,20 +1076,22 @@
 ============================================= -->
 <nav id="nav">
   <div class="nav-inner" id="navInner">
-    <a href="/consultoria/" class="nav-logo">
-      <img src="../assets/logo.png" alt="PricePilot">
-    </a>
-    <div class="nav-links">
+    <div class="nav-logo">
+      <a href="/consultoria/"><img src="../assets/logo.png" alt="PricePilot" /></a>
+    </div>
+    <div class="nav-links" id="navLinks">
       <a href="#controle">Controle</a>
       <a href="#consultoria">Consultoria</a>
       <a href="#para-quem">Para quem</a>
       <a href="#por-que">Por que nós</a>
     </div>
     <div class="nav-cta-wrap">
-      <button class="nav-cta">Falar com especialista</button>
+      <a href="#" class="nav-cta">Falar com especialista</a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+      </svg>
     </button>
   </div>
 </nav>
@@ -851,23 +1100,100 @@
      HERO
 ============================================= -->
 <section id="hero" class="section pp-bg">
-  <div class="blob-top"></div>
-  <div class="blob-left"></div>
-  <div class="blob-right"></div>
+  <div class="hero-network-bg" aria-hidden="true">
+    <svg viewBox="0 0 700 700" fill="none">
+      <path d="M630 60 L500 260 Q460 320 380 350 L200 460" stroke="rgba(77,141,247,0.22)" stroke-width="1.5"/>
+      <path d="M660 320 L500 260" stroke="rgba(77,141,247,0.18)" stroke-width="1.5"/>
+      <path d="M380 350 L520 520" stroke="rgba(77,141,247,0.15)" stroke-width="1.5"/>
+      <circle cx="630" cy="60" r="5" fill="#4D8DF7"/>
+      <circle cx="500" cy="260" r="6" fill="#4D8DF7"/>
+      <circle cx="660" cy="320" r="4" fill="#6B9EFF"/>
+      <circle cx="380" cy="350" r="5" fill="#4D8DF7"/>
+      <circle cx="200" cy="460" r="4" fill="#6B9EFF"/>
+      <circle cx="520" cy="520" r="5" fill="#4D8DF7"/>
+    </svg>
+  </div>
 
-  <div class="hero-content">
-    <p class="tag-mono reveal">[ CONSULTORIA PRICEPILOT ]</p>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="tag-mono reveal">[ Consultoria PricePilot ]</p>
 
-    <h1 class="reveal reveal-d1">Venda para o Governo sem precisar montar uma equipe de licitação.</h1>
+        <h1 class="reveal reveal-d1">Venda para o Governo <span class="hero-grad">sem precisar montar uma equipe</span> de licitação.</h1>
 
-    <p class="hero-subtitle reveal reveal-d2">Sua empresa vende para o Governo. Nós cuidamos da inteligência da licitação. Especialistas conduzem sua operação dentro do PricePilot, do mapeamento da oportunidade à proposta pronta, sempre dentro da margem que você aprovou antes.</p>
+        <p class="hero-subtitle reveal reveal-d2">Sua empresa vende para o Governo. Nós cuidamos da inteligência da licitação. Especialistas conduzem sua operação dentro do PricePilot, do mapeamento da oportunidade à proposta pronta, sempre dentro da margem que você aprovou antes.</p>
 
-    <button class="btn-glass reveal reveal-d3">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Falar com um especialista
-    </button>
+        <button class="btn-primary reveal reveal-d3">Falar com um especialista</button>
 
-    <p class="hero-micro reveal reveal-d4">Atendimento consultivo. O escopo depende da sua operação, e é isso que desenhamos juntos na primeira conversa.</p>
+        <p class="hero-micro reveal reveal-d4">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3v7H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2Z"/><path d="M21 14h-3v7h3a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2Z"/><path d="M3 14v-2a9 9 0 0 1 18 0v2"/></svg>
+          Atendimento consultivo e personalizado para a sua operação
+        </p>
+      </div>
+
+      <div class="hero-card reveal reveal-d2">
+        <h3>Sua operação assistida</h3>
+        <span class="hero-live-badge"><span class="dot"></span>Especialista acompanhando</span>
+
+        <div class="hero-card-body">
+          <div class="hero-timeline">
+            <div class="hero-tl-item done">
+              <span class="hero-tl-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Oportunidade identificada</span>
+            </div>
+            <div class="hero-tl-item done">
+              <span class="hero-tl-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Edital analisado</span>
+            </div>
+            <div class="hero-tl-item done">
+              <span class="hero-tl-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Margem validada</span>
+            </div>
+            <div class="hero-tl-item active">
+              <span class="hero-tl-dot"></span>
+              <span>Proposta preparada</span>
+            </div>
+          </div>
+
+          <div class="hero-doc">
+            <div class="hero-doc-header">
+              <span>Proposta</span>
+              <span class="hero-doc-tag">PP</span>
+            </div>
+            <div class="hero-doc-lines">
+              <span style="width:90%;"></span>
+              <span style="width:70%;"></span>
+              <span style="width:50%;"></span>
+            </div>
+            <div class="hero-doc-highlight">
+              <span class="bar"></span>
+              <div class="row"><span>Valor total estimado</span><strong>R$ 1.842.560,00</strong></div>
+            </div>
+            <svg class="hero-doc-sig" width="60" height="20" viewBox="0 0 60 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 15 Q8 5 14 15 T26 15 Q30 8 34 15 T46 12 Q50 6 54 15"/></svg>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+            <div><span>Oportunidades monitoradas</span><br><strong>128</strong></div>
+          </div>
+          <div class="hero-stat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+            <div><span>Taxa de assertividade</span><br><strong>92%</strong></div>
+          </div>
+          <div class="hero-stat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <div><span>Margem média protegida</span><br><strong>18,6%</strong></div>
+          </div>
+        </div>
+
+        <div class="hero-approved">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          Pronto para sua aprovação
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -878,28 +1204,26 @@
   <div class="container">
     <p class="tag-mono reveal" style="color: var(--blue); text-align: center; margin-bottom: 16px;">[ VOCÊ CONTINUA NO COMANDO ]</p>
 
-    <h2 class="reveal">A execução deixa de ser problema seu.<br>O controle continua sendo.</h2>
+    <h2 class="section-white-heading reveal">A execução deixa de ser problema seu.<br>O controle continua sendo.</h2>
 
-    <p class="controle-desc reveal reveal-d1">A Consultoria PricePilot não é terceirização às cegas. Você continua dono da sua licença, com acesso integral à plataforma, acompanhando tudo em tempo real e podendo operar junto quando quiser. Nossa equipe atua como uma extensão da sua, sem tirar sua autonomia sobre o processo.</p>
+    <p class="section-lead section-lead-white reveal reveal-d1">A Consultoria PricePilot não é terceirização às cegas. Você continua dono da sua licença, com acesso integral à plataforma, acompanhando tudo em tempo real e podendo operar junto quando quiser. Nossa equipe atua como uma extensão da sua, sem tirar sua autonomia sobre o processo.</p>
 
-    <div class="controle-grid">
-      <div class="controle-card reveal reveal-d1">
-        <div class="controle-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <div class="pq-grid reveal reveal-d2">
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
         <p>Você aprova a margem antes. Nada é submetido sem passar por você.</p>
       </div>
-
-      <div class="controle-card reveal reveal-d2">
-        <div class="controle-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <p>Você vê cada proposta sendo construída dentro do PricePilot.</p>
       </div>
-
-      <div class="controle-card reveal reveal-d3">
-        <div class="controle-card-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <p>Você mantém a licença, o histórico e o controle, com ou sem consultoria.</p>
       </div>
@@ -914,39 +1238,32 @@
   <div class="container">
     <p class="tag-mono reveal" style="text-align: center; margin-bottom: 16px;">[ QUANTO CUSTA UM ERRO ]</p>
 
-    <h2 class="reveal">Uma proposta errada pode custar caro.</h2>
+    <h2 class="section-dark-heading reveal">Uma proposta errada pode custar caro.</h2>
 
-    <div class="erros-list">
-      <div class="erro-item reveal reveal-d1">
-        <div class="erro-marker">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <p>Uma margem mal calculada.</p>
+    <div class="feat-grid reveal reveal-d1">
+      <div class="feat-cell">
+        <div class="feat-cell-glow"></div>
+        <svg class="feat-cell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="feat-cell-title"><span class="feat-cell-bar"></span><span>Uma margem mal calculada.</span></div>
       </div>
-
-      <div class="erro-item reveal reveal-d2">
-        <div class="erro-marker">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <p>Um imposto esquecido.</p>
+      <div class="feat-cell">
+        <div class="feat-cell-glow"></div>
+        <svg class="feat-cell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="feat-cell-title"><span class="feat-cell-bar"></span><span>Um imposto esquecido.</span></div>
       </div>
-
-      <div class="erro-item reveal reveal-d3">
-        <div class="erro-marker">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <p>Um frete incorreto.</p>
+      <div class="feat-cell">
+        <div class="feat-cell-glow"></div>
+        <svg class="feat-cell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="feat-cell-title"><span class="feat-cell-bar"></span><span>Um frete incorreto.</span></div>
       </div>
-
-      <div class="erro-item reveal reveal-d4">
-        <div class="erro-marker">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </div>
-        <p>Uma documentação enviada fora do prazo.</p>
+      <div class="feat-cell">
+        <div class="feat-cell-glow"></div>
+        <svg class="feat-cell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="feat-cell-title"><span class="feat-cell-bar"></span><span>Uma documentação enviada fora do prazo.</span></div>
       </div>
     </div>
 
-    <p class="erros-closing reveal">Qualquer um desses erros pode transformar um contrato lucrativo em prejuízo. Nossa consultoria existe justamente para reduzir esses riscos.</p>
+    <p class="erros-closing reveal reveal-d2">Qualquer um desses erros pode transformar um contrato lucrativo em prejuízo. Nossa consultoria existe justamente para reduzir esses riscos.</p>
   </div>
 </section>
 
@@ -954,65 +1271,65 @@
      BLOCO 4: O QUE A CONSULTORIA CONDUZ
 ============================================= -->
 <section id="consultoria" class="section pp-bg-white consultoria-section">
+  <div class="plat-circuit-bg"></div>
+  <div class="plat-circuit-dots"></div>
+
   <div class="container">
     <p class="tag-mono reveal" style="color: var(--blue); text-align: center; margin-bottom: 16px;">[ O QUE A CONSULTORIA CONDUZ ]</p>
 
-    <h2 class="reveal">Da oportunidade à proposta submetida, sem lacuna.</h2>
+    <h2 class="section-white-heading reveal" style="margin-bottom: 48px;">Da oportunidade à proposta submetida, sem lacuna.</h2>
 
-    <div class="steps-grid">
-      <div class="step-card reveal reveal-d1">
-        <div class="step-card-header">
-          <span class="step-num">[ 01 ]</span>
-          <div class="step-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <div class="plat-journey-wrap">
+      <!-- Row 1: steps 01-03 -->
+      <div class="plat-row reveal reveal-d1">
+        <div class="plat-step">
+          <span class="plat-step-badge">01</span>
+          <div class="plat-step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
+          <h4>Mapeamento de oportunidades</h4>
         </div>
-        <h3>Mapeamento de oportunidades</h3>
-        <p>Encontramos os editais que fazem sentido para o seu negócio, no seu setor e na sua faixa de atuação.</p>
+        <div class="plat-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </div>
+        <div class="plat-step">
+          <span class="plat-step-badge">02</span>
+          <div class="plat-step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h4>Análise técnica e documental</h4>
+        </div>
+        <div class="plat-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </div>
+        <div class="plat-step">
+          <span class="plat-step-badge">03</span>
+          <div class="plat-step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <h4>Estruturação da proposta</h4>
+        </div>
       </div>
 
-      <div class="step-card reveal reveal-d2">
-        <div class="step-card-header">
-          <span class="step-num">[ 02 ]</span>
-          <div class="step-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <!-- Row 2: steps 04-05 -->
+      <div class="plat-row plat-row-bottom reveal reveal-d2">
+        <div class="plat-step">
+          <span class="plat-step-badge">04</span>
+          <div class="plat-step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
+          <h4>Condução do processo</h4>
         </div>
-        <h3>Análise técnica e documental</h3>
-        <p>Conferimos as exigências do edital e a sua documentação antes de você investir tempo numa participação que não daria certo.</p>
-      </div>
-
-      <div class="step-card reveal reveal-d3">
-        <div class="step-card-header">
-          <span class="step-num">[ 03 ]</span>
-          <div class="step-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <div class="plat-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </div>
+        <div class="plat-step">
+          <span class="plat-step-badge">05</span>
+          <div class="plat-step-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
+          <h4>Validação da participação e da margem</h4>
         </div>
-        <h3>Estruturação da proposta</h3>
-        <p>Montamos a composição de custos completa (impostos, encargos, frete, margem) com a estrutura validada do PricePilot.</p>
-      </div>
-
-      <div class="step-card reveal reveal-d4">
-        <div class="step-card-header">
-          <span class="step-num">[ 04 ]</span>
-          <div class="step-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-        </div>
-        <h3>Condução do processo</h3>
-        <p>Cuidamos do fluxo do início ao fim, com apoio durante o pregão eletrônico.</p>
-      </div>
-
-      <div class="step-card reveal reveal-d5">
-        <div class="step-card-header">
-          <span class="step-num">[ 05 ]</span>
-          <div class="step-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-        </div>
-        <h3>Validação da participação e da margem</h3>
-        <p>Confirmamos, junto com você, que o preço é competitivo e viável. Sem surpresa de inexequibilidade depois que você ganhou.</p>
       </div>
     </div>
   </div>
@@ -1025,26 +1342,24 @@
   <div class="container">
     <p class="tag-mono reveal" style="text-align: center; margin-bottom: 16px;">[ PARA QUEM É ]</p>
 
-    <h2 class="reveal">Para quem é a Consultoria PricePilot</h2>
+    <h2 class="section-dark-heading reveal">Para quem é a Consultoria PricePilot</h2>
 
-    <div class="para-quem-grid">
-      <div class="para-quem-card reveal reveal-d1">
-        <div class="para-quem-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <div class="pq-grid pq-grid--dark reveal reveal-d1" style="margin-top:48px;">
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <p>Sua empresa quer vender para o Governo, mas ainda não tem repertório interno de precificação pública e teme ganhar no prejuízo.</p>
       </div>
-
-      <div class="para-quem-card reveal reveal-d2">
-        <div class="para-quem-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <p>Você já participa, mas não tem tempo de montar proposta para cada edital e sente que perde oportunidades por falta de mão.</p>
       </div>
-
-      <div class="para-quem-card reveal reveal-d3">
-        <div class="para-quem-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <div class="pq-cell">
+        <div class="pq-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         </div>
         <p>Você quer escalar a participação sem montar um time de licitação do zero.</p>
       </div>
@@ -1070,7 +1385,7 @@
       </div>
 
       <div class="porque-text">
-        <span class="tag-mono-blue reveal">[ POR QUE COM A GENTE ]</span>
+        <p class="tag-mono reveal" style="color: var(--blue); margin-bottom: 16px;">[ POR QUE COM A GENTE ]</p>
         <h2 class="reveal reveal-d1">Quem conduz é quem viveu o problema.</h2>
         <p class="desc reveal reveal-d2">O PricePilot nasceu de 12 anos dentro do mercado de licitação, construído por quem cansou de montar proposta em planilha sem nenhuma ferramenta à altura. A mesma bagagem que originou a plataforma está por trás da consultoria. Você não contrata um operador genérico. Contrata especialistas que precificam licitação todos os dias, apoiados pela Sages, com histórico de entrega em projetos de grande porte.</p>
       </div>
@@ -1083,7 +1398,7 @@
 ============================================= -->
 <section id="cta" class="section pp-bg cta-final-section">
   <div class="container" style="text-align: center;">
-    <h2 class="reveal">Comece sua operação com segurança.</h2>
+    <h2 class="section-dark-heading reveal">Comece sua operação com segurança.</h2>
 
     <p class="cta-final-desc reveal reveal-d1">Nossa equipe entende o seu mercado, desenha a estratégia de participação e conduz toda a operação dentro do PricePilot. Você mantém o controle das decisões. Nós cuidamos da execução.</p>
 
@@ -1099,17 +1414,33 @@
 <!-- =============================================
      FOOTER
 ============================================= -->
-<footer class="pp-bg footer">
+<footer class="pp-bg">
   <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="../assets/logo.png" alt="PricePilot" height="36">
-      <p class="footer-tagline">Seu copiloto de decisão para licitações.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img class="logo" src="../assets/logo.png" alt="PricePilot" />
+        <p>Seu copiloto de decisão para licitações.<br>Feito por quem viveu o problema.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Consultoria</h4>
+        <ul>
+          <li><a href="#controle">Controle</a></li>
+          <li><a href="#consultoria">Como conduzimos</a></li>
+          <li><a href="#para-quem">Para quem é</a></li>
+          <li><a href="#por-que">Por que nós</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>PricePilot</h4>
+        <ul>
+          <li><a href="/">Página principal</a></li>
+          <li><a href="/parceiros/">Programa de Parceiros</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="/">Página principal</a>
-      <a href="/parceiros/">Programa de Parceiros</a>
+    <div class="footer-bottom">
+      &copy; 2026 PricePilot. Todos os direitos reservados.
     </div>
-    <p class="footer-legal">&copy; 2026 PricePilot. Todos os direitos reservados.</p>
   </div>
 </footer>
 
@@ -1177,7 +1508,7 @@
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('.btn-glass, .nav-cta').forEach(btn => {
+    document.querySelectorAll('.btn-glass, .btn-primary, .nav-cta').forEach(btn => {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         openModal();
