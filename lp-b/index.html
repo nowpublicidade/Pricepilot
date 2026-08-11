@@ -1216,8 +1216,37 @@
       cursor: pointer; line-height: 1.4;
     }
     .pp-form-checkbox input {
-      margin-top: 2px; width: 16px; height: 16px; flex-shrink: 0;
-      accent-color: var(--blue);
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .pp-checkbox-box {
+      position: relative;
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      margin-top: 1px;
+      border-radius: 5px;
+      border: 1.5px solid rgba(255,255,255,0.32);
+      background: rgba(255,255,255,0.06);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pp-checkbox-box::after {
+      content: '';
+      position: absolute;
+      left: 5px; top: 1px;
+      width: 5px; height: 9px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0;
+    }
+    .pp-form-checkbox input:checked ~ .pp-checkbox-box {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .pp-form-checkbox input:checked ~ .pp-checkbox-box::after { opacity: 1; }
+    .pp-form-checkbox input:focus-visible ~ .pp-checkbox-box {
+      box-shadow: 0 0 0 3px rgba(29,76,209,0.35);
     }
 
     .pp-form-microcopy {
@@ -2642,10 +2671,10 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
         <div class="pp-form-group full" style="margin-top:18px;">
           <label>Objetivos que deseja na plataforma *</label>
           <div class="pp-form-checkgroup">
-            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Receber oportunidades de licitação para minha empresa" /> Receber oportunidades de licitação para minha empresa</label>
-            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Elaborar propostas comerciais" /> Elaborar propostas comerciais</label>
-            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Realizar cálculos de custos" /> Realizar cálculos de custos</label>
-            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Configurar minha empresa gratuitamente na plataforma durante o período de avaliação" /> Configurar minha empresa gratuitamente na plataforma durante o período de avaliação</label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Receber oportunidades de licitação para minha empresa" /><span class="pp-checkbox-box"></span><span>Receber oportunidades de licitação para minha empresa</span></label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Elaborar propostas comerciais" /><span class="pp-checkbox-box"></span><span>Elaborar propostas comerciais</span></label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Realizar cálculos de custos" /><span class="pp-checkbox-box"></span><span>Realizar cálculos de custos</span></label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Configurar minha empresa gratuitamente na plataforma durante o período de avaliação" /><span class="pp-checkbox-box"></span><span>Configurar minha empresa gratuitamente na plataforma durante o período de avaliação</span></label>
           </div>
         </div>
 
