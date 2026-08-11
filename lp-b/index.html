@@ -2233,7 +2233,8 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
     const successTitle = document.getElementById('ppSuccessTitle');
     const successText  = document.getElementById('ppSuccessText');
 
-    const WEBHOOK = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
+    const WEBHOOK  = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
+    const WEBHOOK2 = 'https://webhook.agencianowpublicidade.online/webhook/b381d5d8-fa99-4c4c-bf6e-b47af01961ad';
 
     // Captura UTMs da URL ao carregar
     function getUtms() {
@@ -2430,7 +2431,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       submitBtn2.textContent = 'Enviando...';
 
       try {
-        await fetch(WEBHOOK, {
+        await fetch(WEBHOOK2, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
