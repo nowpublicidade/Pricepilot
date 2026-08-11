@@ -1145,10 +1145,92 @@
     .pp-form-error {
       font-size: 12px; color: #f87171; margin-top: 12px; text-align: center; display: none;
     }
+
+    /* --- Etapa de escolha do fluxo --- */
+    .pp-choice-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .pp-choice-card {
+      position: relative;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 20px 18px;
+      text-align: left;
+      cursor: pointer;
+      color: #fff;
+      font-family: inherit;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .pp-choice-card:hover {
+      border-color: rgba(29,76,209,0.55);
+      background: rgba(29,76,209,0.1);
+      transform: translateY(-2px);
+    }
+    .pp-choice-card--highlight {
+      border-color: rgba(77,141,247,0.5);
+      background: rgba(29,76,209,0.12);
+    }
+    .pp-choice-badge {
+      position: absolute; top: -10px; right: 14px;
+      background: var(--blue); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .pp-choice-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(29,76,209,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-pale);
+      margin-bottom: 12px;
+    }
+    .pp-choice-card h4 { font-size: 15px; font-weight: 700; color: #fff; margin: 0 0 6px; }
+    .pp-choice-card p { font-size: 12.5px; color: rgba(255,255,255,0.55); line-height: 1.5; margin: 0; }
+
+    .pp-modal-back {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.5); font-size: 13px;
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-bottom: 16px; padding: 0; font-family: inherit;
+      transition: color 0.2s;
+    }
+    .pp-modal-back:hover { color: #fff; }
+
+    .pp-form-notice {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: rgba(29,76,209,0.12);
+      border: 1px solid rgba(29,76,209,0.35);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+    .pp-form-notice svg { flex-shrink: 0; color: var(--blue-pale); margin-top: 1px; }
+
+    .pp-form-checkgroup { display: flex; flex-direction: column; gap: 10px; }
+    .pp-form-checkbox {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.85);
+      cursor: pointer; line-height: 1.4;
+    }
+    .pp-form-checkbox input {
+      margin-top: 2px; width: 16px; height: 16px; flex-shrink: 0;
+      accent-color: var(--blue);
+    }
+
+    .pp-form-microcopy {
+      font-size: 12px; color: rgba(255,255,255,0.55);
+      text-align: center; margin-top: 14px; line-height: 1.5;
+    }
+    .pp-form-microcopy strong { color: var(--blue-pale); }
+
     @media (max-width: 540px) {
       .pp-modal { padding: 28px 20px 24px; }
       .pp-form-grid { grid-template-columns: 1fr; }
       .pp-form-group.full { grid-column: 1; }
+      .pp-choice-grid { grid-template-columns: 1fr; }
     }
   </style>
 
@@ -2099,13 +2181,28 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
 
   /* ---- Modal CTA ---- */
   document.addEventListener('DOMContentLoaded', function () {
-    const overlay  = document.getElementById('ppModal');
-    const closeBtn = document.getElementById('ppModalClose');
-    const form     = document.getElementById('ppLeadForm');
-    const submitBtn= document.getElementById('ppSubmitBtn');
-    const errMsg   = document.getElementById('ppFormError');
-    const formWrap = document.getElementById('ppFormWrap');
-    const success  = document.getElementById('ppSuccess');
+    const overlay   = document.getElementById('ppModal');
+    const closeBtn  = document.getElementById('ppModalClose');
+
+    const choiceWrap = document.getElementById('ppChoiceWrap');
+    const chooseApresentacao = document.getElementById('ppChooseApresentacao');
+    const chooseAgora = document.getElementById('ppChooseAgora');
+    const back1 = document.getElementById('ppBack1');
+    const back2 = document.getElementById('ppBack2');
+
+    const form      = document.getElementById('ppLeadForm');
+    const submitBtn = document.getElementById('ppSubmitBtn');
+    const errMsg    = document.getElementById('ppFormError');
+    const formWrap  = document.getElementById('ppFormWrap');
+
+    const form2      = document.getElementById('ppLeadForm2');
+    const submitBtn2 = document.getElementById('ppSubmitBtn2');
+    const errMsg2    = document.getElementById('ppFormError2');
+    const formWrap2  = document.getElementById('ppFormWrap2');
+
+    const success      = document.getElementById('ppSuccess');
+    const successTitle = document.getElementById('ppSuccessTitle');
+    const successText  = document.getElementById('ppSuccessText');
 
     const WEBHOOK = 'https://webhook.agencianowpublicidade.online/webhook/e2b9445d-135f-4f9f-97ff-0298f2c213fa';
 
@@ -2118,9 +2215,17 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       return utms;
     }
 
+    function showStep(step) {
+      choiceWrap.style.display = step === 'choice' ? '' : 'none';
+      formWrap.style.display   = step === 'form1'  ? '' : 'none';
+      formWrap2.style.display  = step === 'form2'  ? '' : 'none';
+      success.classList.remove('visible');
+    }
+
     function openModal() {
       overlay.classList.add('active');
       document.body.style.overflow = 'hidden';
+      showStep('choice');
     }
     function closeModal() {
       overlay.classList.remove('active');
@@ -2135,6 +2240,12 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       });
     });
 
+    // Escolha do fluxo
+    chooseApresentacao.addEventListener('click', () => showStep('form1'));
+    chooseAgora.addEventListener('click', () => showStep('form2'));
+    back1.addEventListener('click', () => showStep('choice'));
+    back2.addEventListener('click', () => showStep('choice'));
+
     // Close on overlay click
     overlay.addEventListener('click', function (e) {
       if (e.target === overlay) closeModal();
@@ -2147,16 +2258,29 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
     });
 
     // Phone mask
-    const phoneInput = document.getElementById('ppTelefone');
-    phoneInput.addEventListener('input', function () {
-      let v = this.value.replace(/\D/g, '').slice(0, 11);
-      if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
-      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
-      else if (v.length > 0) v = '(' + v;
+    function maskPhone(el) {
+      el.addEventListener('input', function () {
+        let v = this.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+        else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+        else if (v.length > 0) v = '(' + v;
+        this.value = v;
+      });
+    }
+    maskPhone(document.getElementById('ppTelefone'));
+    maskPhone(document.getElementById('ppTelefone2'));
+
+    // CNPJ mask
+    document.getElementById('ppCnpj2').addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '').slice(0, 14);
+      v = v.replace(/^(\d{2})(\d)/, '$1.$2');
+      v = v.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+      v = v.replace(/\.(\d{3})(\d)/, '.$1/$2');
+      v = v.replace(/(\d{4})(\d)/, '$1-$2');
       this.value = v;
     });
 
-    // Submit
+    // Submit — Agendar apresentação (fluxo atual, inalterado)
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       errMsg.style.display = 'none';
@@ -2174,6 +2298,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       const utms = getUtms();
 
       const payload = {
+        fluxo: 'agendar_apresentacao',
         nome,
         telefone: tel,
         email,
@@ -2200,7 +2325,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
         // Meta Pixel: Lead
         if (typeof fbq === 'function') {
           fbq('track', 'Lead', {
-            content_name: 'CTA Form',
+            content_name: 'CTA Form - Agendar Apresentacao',
             ...utms
           });
         }
@@ -2210,18 +2335,104 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
           gtag('event', 'close_convert_lead', {
             event_category: 'lead',
             email,
+            fluxo: 'agendar_apresentacao',
             ...utms
           });
         }
 
+        successTitle.textContent = 'Recebemos seu contato!';
+        successText.textContent = 'Nossa equipe vai entrar em contato para agendar sua apresentação.';
         formWrap.style.display = 'none';
         success.classList.add('visible');
-        setTimeout(closeModal, 4000);
+        setTimeout(closeModal, 5000);
       } catch (err) {
         errMsg.textContent = 'Erro ao enviar. Tente novamente.';
         errMsg.style.display = 'block';
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Solicitar meu acesso de teste';
+      }
+    });
+
+    // Submit — Quero começar agora (formulário complementar)
+    form2.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errMsg2.style.display = 'none';
+
+      const empresa     = document.getElementById('ppEmpresa2').value.trim();
+      const cnpj        = document.getElementById('ppCnpj2').value.trim();
+      const email       = document.getElementById('ppEmail2').value.trim();
+      const tel         = document.getElementById('ppTelefone2').value.trim();
+      const estado      = document.getElementById('ppEstado2').value;
+      const municipios  = document.getElementById('ppMunicipios2').value.trim();
+      const regime      = document.getElementById('ppRegime2').value;
+      const faturamento = document.getElementById('ppFaturamento2').value;
+      const segmento    = document.getElementById('ppSegmento2').value;
+      const experiencia = document.getElementById('ppExperiencia2').value;
+      const objetivos   = Array.from(document.querySelectorAll('input[name="objetivos"]:checked')).map(el => el.value);
+
+      if (!empresa || !cnpj || !email || !tel || !estado || !municipios || !regime || !faturamento || !segmento || !experiencia || objetivos.length === 0) {
+        errMsg2.style.display = 'block';
+        return;
+      }
+
+      const utms = getUtms();
+
+      const payload = {
+        fluxo: 'quero_comecar_agora',
+        empresa,
+        cnpj,
+        email,
+        telefone: tel,
+        estado,
+        municipios,
+        regime_tributario: regime,
+        faixa_faturamento: faturamento,
+        segmento,
+        objetivos,
+        experiencia_licitacao: experiencia,
+        pagina_url: window.location.href,
+        timestamp: new Date().toISOString(),
+        ...utms
+      };
+
+      submitBtn2.disabled = true;
+      submitBtn2.textContent = 'Enviando...';
+
+      try {
+        await fetch(WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // Meta Pixel: Lead
+        if (typeof fbq === 'function') {
+          fbq('track', 'Lead', {
+            content_name: 'CTA Form - Comecar Agora',
+            ...utms
+          });
+        }
+
+        // Google Analytics: close_convert_lead
+        if (typeof gtag === 'function') {
+          gtag('event', 'close_convert_lead', {
+            event_category: 'lead',
+            email,
+            fluxo: 'quero_comecar_agora',
+            ...utms
+          });
+        }
+
+        successTitle.textContent = 'Recebemos seus dados!';
+        successText.textContent = 'Nossa equipe vai configurar sua empresa na plataforma. Você recebe os dados de acesso por e-mail e WhatsApp assim que estiver tudo pronto.';
+        formWrap2.style.display = 'none';
+        success.classList.add('visible');
+        setTimeout(closeModal, 6000);
+      } catch (err) {
+        errMsg2.textContent = 'Erro ao enviar. Tente novamente.';
+        errMsg2.style.display = 'block';
+        submitBtn2.disabled = false;
+        submitBtn2.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Quero começar agora';
       }
     });
   });
@@ -2235,11 +2446,41 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
   <div class="pp-modal">
     <button class="pp-modal-close" id="ppModalClose" aria-label="Fechar">&times;</button>
 
-    <!-- Formulário -->
-    <div id="ppFormWrap">
+    <!-- Etapa 0: escolha do fluxo -->
+    <div id="ppChoiceWrap">
       <div class="pp-modal-header">
         <p class="pp-modal-tag">[ Período de teste ]</p>
-        <h3 id="ppModalTitle">Solicite seu acesso de teste</h3>
+        <h3 id="ppModalTitle">Como você prefere começar?</h3>
+        <p>Escolha o caminho que faz mais sentido para você agora.</p>
+      </div>
+      <div class="pp-choice-grid">
+        <button type="button" class="pp-choice-card" id="ppChooseApresentacao">
+          <div class="pp-choice-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h4>Agendar apresentação</h4>
+          <p>Quero conhecer a plataforma com o time antes de começar.</p>
+        </button>
+        <button type="button" class="pp-choice-card pp-choice-card--highlight" id="ppChooseAgora">
+          <span class="pp-choice-badge">Mais rápido</span>
+          <div class="pp-choice-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h4>Quero começar agora</h4>
+          <p>Receber meu acesso já configurado e testar hoje mesmo.</p>
+        </button>
+      </div>
+    </div>
+
+    <!-- Etapa 1a: Agendar apresentação (fluxo atual, inalterado) -->
+    <div id="ppFormWrap" style="display:none;">
+      <button type="button" class="pp-modal-back" id="ppBack1">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </button>
+      <div class="pp-modal-header">
+        <p class="pp-modal-tag">[ Período de teste ]</p>
+        <h3>Solicite seu acesso de teste</h3>
         <p>Preencha os dados abaixo e nossa equipe entrará em contato em breve.</p>
       </div>
 
@@ -2314,13 +2555,133 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       </form>
     </div>
 
+    <!-- Etapa 1b: Quero começar agora (formulário complementar) -->
+    <div id="ppFormWrap2" style="display:none;">
+      <button type="button" class="pp-modal-back" id="ppBack2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </button>
+      <div class="pp-modal-header">
+        <p class="pp-modal-tag">[ Acesso configurado ]</p>
+        <h3>Vamos configurar sua empresa</h3>
+        <p>Preencha <strong>todas as informações</strong> abaixo para que nossa equipe deixe o seu ambiente pronto antes de liberar o seu acesso.</p>
+      </div>
+
+      <form id="ppLeadForm2" novalidate>
+        <div class="pp-form-grid">
+          <div class="pp-form-group full">
+            <label for="ppEmpresa2">Nome da empresa *</label>
+            <input type="text" id="ppEmpresa2" name="empresa" required placeholder="Razão social ou nome fantasia" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppCnpj2">CNPJ *</label>
+            <input type="text" id="ppCnpj2" name="cnpj" required placeholder="00.000.000/0000-00" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppEmail2">E-mail *</label>
+            <input type="email" id="ppEmail2" name="email" required placeholder="seu@email.com.br" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppTelefone2">Telefone com DDD *</label>
+            <input type="tel" id="ppTelefone2" name="telefone" required placeholder="(11) 99999-9999" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppEstado2">Estado de atuação *</label>
+            <select id="ppEstado2" name="estado" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+            </select>
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppMunicipios2">Municípios onde participa de licitações *</label>
+            <input type="text" id="ppMunicipios2" name="municipios" required placeholder="Ex: São Paulo, Campinas, Guarulhos" />
+          </div>
+          <div class="pp-form-group">
+            <label for="ppRegime2">Regime tributário *</label>
+            <select id="ppRegime2" name="regime_tributario" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="MEI">MEI</option>
+              <option value="Simples Nacional">Simples Nacional</option>
+              <option value="Lucro Presumido">Lucro Presumido</option>
+              <option value="Lucro Real">Lucro Real</option>
+              <option value="Não sei informar">Não sei informar</option>
+            </select>
+          </div>
+          <div class="pp-form-group">
+            <label for="ppFaturamento2">Faixa de faturamento *</label>
+            <select id="ppFaturamento2" name="faixa_faturamento" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Até R$ 360 mil/ano">Até R$ 360 mil/ano</option>
+              <option value="R$ 360 mil a R$ 4,8 milhões/ano">R$ 360 mil a R$ 4,8 milhões/ano</option>
+              <option value="R$ 4,8 milhões a R$ 20 milhões/ano">R$ 4,8 milhões a R$ 20 milhões/ano</option>
+              <option value="Acima de R$ 20 milhões/ano">Acima de R$ 20 milhões/ano</option>
+            </select>
+          </div>
+          <div class="pp-form-group full">
+            <label for="ppSegmento2">Segmento de atuação *</label>
+            <select id="ppSegmento2" name="segmento" required>
+              <option value="" disabled selected>Selecione seu segmento</option>
+              <option value="Limpeza e Conservação">Limpeza e Conservação</option>
+              <option value="Segurança e Vigilância">Segurança e Vigilância</option>
+              <option value="Facilities e Serviços Gerais">Facilities e Serviços Gerais</option>
+              <option value="Manutenção Predial">Manutenção Predial</option>
+              <option value="Recepção, Portaria e Apoio Administrativo">Recepção, Portaria e Apoio Administrativo</option>
+              <option value="Alimentação e Nutrição">Alimentação e Nutrição</option>
+              <option value="Jardinagem e Paisagismo">Jardinagem e Paisagismo</option>
+              <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+              <option value="Engenharia e Manutenção">Engenharia e Manutenção</option>
+              <option value="Serviços de Saúde">Serviços de Saúde</option>
+              <option value="Transporte e Logística">Transporte e Logística</option>
+              <option value="Consultoria e Assessoria">Consultoria e Assessoria</option>
+              <option value="Treinamento e Capacitação">Treinamento e Capacitação</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pp-form-group full" style="margin-top:18px;">
+          <label>Objetivos que deseja na plataforma *</label>
+          <div class="pp-form-checkgroup">
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Receber oportunidades de licitação para minha empresa" /> Receber oportunidades de licitação para minha empresa</label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Elaborar propostas comerciais" /> Elaborar propostas comerciais</label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Realizar cálculos de custos" /> Realizar cálculos de custos</label>
+            <label class="pp-form-checkbox"><input type="checkbox" name="objetivos" value="Configurar minha empresa gratuitamente na plataforma durante o período de avaliação" /> Configurar minha empresa gratuitamente na plataforma durante o período de avaliação</label>
+          </div>
+        </div>
+
+        <div class="pp-form-group full" style="margin-top:18px;">
+          <label for="ppExperiencia2">Experiência com licitações *</label>
+          <select id="ppExperiencia2" name="experiencia_licitacao" required>
+            <option value="" disabled selected>Selecione</option>
+            <option value="Nunca participei">Nunca participei</option>
+            <option value="Participo ocasionalmente">Participo ocasionalmente</option>
+            <option value="Participo com frequência">Participo com frequência</option>
+          </select>
+        </div>
+
+        <div class="pp-form-notice">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span>Preencha <strong>todas as informações</strong> acima: é com base nelas que configuramos a sua empresa na plataforma antes de liberar o seu acesso.</span>
+        </div>
+
+        <p class="pp-form-error" id="ppFormError2">Por favor, preencha todos os campos obrigatórios e selecione ao menos um objetivo.</p>
+
+        <button type="submit" class="pp-form-submit" id="ppSubmitBtn2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Quero começar agora
+        </button>
+
+        <p class="pp-form-microcopy">Assim que a configuração estiver pronta, você recebe os dados de acesso por <strong>e-mail</strong> e <strong>WhatsApp</strong>.</p>
+      </form>
+    </div>
+
     <!-- Sucesso -->
     <div class="pp-modal-success" id="ppSuccess">
       <div class="pp-modal-success-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <h3>Recebemos seu contato!</h3>
-      <p>Nossa equipe entrará em contato em breve para iniciar seu período de teste.</p>
+      <h3 id="ppSuccessTitle">Recebemos seu contato!</h3>
+      <p id="ppSuccessText">Nossa equipe entrará em contato em breve para iniciar seu período de teste.</p>
     </div>
   </div>
 </div>
