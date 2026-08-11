@@ -2387,6 +2387,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       e.preventDefault();
       errMsg2.style.display = 'none';
 
+      const responsavel = document.getElementById('ppResponsavel2').value.trim();
       const empresa     = document.getElementById('ppEmpresa2').value.trim();
       const cnpj        = document.getElementById('ppCnpj2').value.trim();
       const email       = document.getElementById('ppEmail2').value.trim();
@@ -2399,7 +2400,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
       const experiencia = document.getElementById('ppExperiencia2').value;
       const objetivos   = Array.from(document.querySelectorAll('input[name="objetivos"]:checked')).map(el => el.value);
 
-      if (!empresa || !cnpj || !email || !tel || !estado || !municipios || !regime || !faturamento || !segmento || !experiencia || objetivos.length === 0) {
+      if (!responsavel || !empresa || !cnpj || !email || !tel || !estado || !municipios || !regime || !faturamento || !segmento || !experiencia || objetivos.length === 0) {
         errMsg2.style.display = 'block';
         return;
       }
@@ -2408,6 +2409,7 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
 
       const payload = {
         fluxo: 'quero_comecar_agora',
+        responsavel,
         empresa,
         cnpj,
         email,
@@ -2598,6 +2600,10 @@ src="https://www.facebook.com/tr?id=1478354830613271&ev=PageView&noscript=1"
 
       <form id="ppLeadForm2" novalidate>
         <div class="pp-form-grid">
+          <div class="pp-form-group full">
+            <label for="ppResponsavel2">Nome do responsável *</label>
+            <input type="text" id="ppResponsavel2" name="responsavel" required placeholder="Seu nome completo" />
+          </div>
           <div class="pp-form-group full">
             <label for="ppEmpresa2">Nome da empresa *</label>
             <input type="text" id="ppEmpresa2" name="empresa" required placeholder="Razão social ou nome fantasia" />
