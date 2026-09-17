@@ -2401,11 +2401,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           });
         }
 
-        successTitle.textContent = 'Recebemos seu contato!';
-        successText.textContent = 'Nossa equipe vai entrar em contato para agendar sua apresentação.';
-        formWrap.style.display = 'none';
-        success.classList.add('visible');
-        setTimeout(closeModal, 5000);
+        window.location.href = '/obrigado';
       } catch (err) {
         errMsg.textContent = 'Erro ao enviar. Tente novamente.';
         errMsg.style.display = 'block';
@@ -2486,11 +2482,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           });
         }
 
-        successTitle.textContent = 'Recebemos seus dados!';
-        successText.textContent = 'Nossa equipe vai configurar sua empresa na plataforma. Você recebe os dados de acesso por e-mail e WhatsApp assim que estiver tudo pronto.';
-        formWrap2.style.display = 'none';
-        success.classList.add('visible');
-        setTimeout(closeModal, 6000);
+        window.location.href = '/obrigado';
       } catch (err) {
         errMsg2.textContent = 'Erro ao enviar. Tente novamente.';
         errMsg2.style.display = 'block';

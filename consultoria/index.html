@@ -1611,9 +1611,7 @@
           gtag('event', 'close_convert_lead', { event_category: 'lead', email, ...utms });
         }
 
-        formWrap.style.display = 'none';
-        success.classList.add('visible');
-        setTimeout(closeModal, 4000);
+        window.location.href = '/obrigado';
       } catch (err) {
         errMsg.textContent = 'Erro ao enviar. Tente novamente.';
         errMsg.style.display = 'block';
