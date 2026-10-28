@@ -3409,6 +3409,14 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           });
         }
 
+        // OpenAI Pixel: lead_created
+
+        if (typeof oaiq === 'function') {
+
+          oaiq('measure', 'lead_created', { type: 'customer_action' });
+
+        }
+
         window.location.href = '/obrigado';
       } catch (err) {
         errMsg.textContent = 'Erro ao enviar. Tente novamente.';

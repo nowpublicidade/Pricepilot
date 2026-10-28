@@ -1615,6 +1615,14 @@
           gtag('event', 'close_convert_lead', { event_category: 'lead', email, ...utms });
         }
 
+        // OpenAI Pixel: lead_created
+
+        if (typeof oaiq === 'function') {
+
+          oaiq('measure', 'lead_created', { type: 'customer_action' });
+
+        }
+
         window.location.href = '/obrigado';
       } catch (err) {
         errMsg.textContent = 'Erro ao enviar. Tente novamente.';
